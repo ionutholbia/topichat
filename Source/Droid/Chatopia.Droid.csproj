@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -68,13 +68,17 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.Droid.csproj">
+      <Project>{eff00800-c31f-4826-a35a-39f4176a0f0e}</Project>
+      <Name>M2Mqtt.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.PCL.csproj">
+      <Project>{e8b417de-7574-4656-8b4b-07aed4fc4f42}</Project>
+      <Name>M2Mqtt.PCL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Chatopia.Core.csproj">
       <Project>{0A040E22-3579-4341-B284-08AFC530EA20}</Project>
       <Name>Chatopia.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.Droid.csproj">
-      <Project>{EFF00800-C31F-4826-A35A-39F4176A0F0E}</Project>
-      <Name>M2Mqtt.Droid</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

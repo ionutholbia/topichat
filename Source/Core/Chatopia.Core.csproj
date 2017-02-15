@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -59,8 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.PCL.csproj">
-      <Project>{E8B417DE-7574-4656-8B4B-07AED4FC4F42}</Project>
+    <ProjectReference Include="..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.PCL.csproj">
+      <Project>{e8b417de-7574-4656-8b4b-07aed4fc4f42}</Project>
       <Name>M2Mqtt.PCL</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -98,12 +98,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
@@ -138,13 +140,19 @@
     <BundleResource Include="Resources\settings%402x.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.iOS.csproj">
+      <Project>{78378739-a0b3-47ad-b782-446efc2f5633}</Project>
+      <Name>M2Mqtt.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
+    <ProjectReference Include="..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.PCL.csproj">
+      <Project>{e8b417de-7574-4656-8b4b-07aed4fc4f42}</Project>
+      <Name>M2Mqtt.PCL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Chatopia.Core.csproj">
       <Project>{0A040E22-3579-4341-B284-08AFC530EA20}</Project>
       <Name>Chatopia.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.iOS.csproj">
-      <Project>{78378739-A0B3-47AD-B782-446EFC2F5633}</Project>
-      <Name>M2Mqtt.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
