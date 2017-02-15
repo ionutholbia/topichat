@@ -2,15 +2,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatopia.Droid", "Droid\Chatopia.Droid.csproj", "{FE2E30A5-B0AA-4215-A327-05CBF8D94BBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topichat.Droid", "Droid\Topichat.Droid.csproj", "{FE2E30A5-B0AA-4215-A327-05CBF8D94BBD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rdParty", "3rdParty", "{222598B8-7FB7-4123-B268-D8304E230EFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatopia.iOS", "iOS\Chatopia.iOS.csproj", "{07085C5B-0BBB-4DEB-B0C1-3F0DB477E93F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topichat.iOS", "iOS\Topichat.iOS.csproj", "{07085C5B-0BBB-4DEB-B0C1-3F0DB477E93F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatopia.Core", "Core\Chatopia.Core.csproj", "{0A040E22-3579-4341-B284-08AFC530EA20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topichat.Core", "Core\Topichat.Core.csproj", "{0A040E22-3579-4341-B284-08AFC530EA20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatopia.Core.UnitTest", "Core.UnitTest\Chatopia.Core.UnitTest.csproj", "{9BB98853-D799-4D27-8110-EC8877B67143}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topichat.Core.UnitTest", "Core.UnitTest\Topichat.Core.UnitTest.csproj", "{9BB98853-D799-4D27-8110-EC8877B67143}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2Mqtt.Droid", "..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.Droid.csproj", "{EFF00800-C31F-4826-A35A-39F4176A0F0E}"
 EndProject

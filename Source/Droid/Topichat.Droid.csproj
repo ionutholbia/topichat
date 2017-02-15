@@ -76,9 +76,9 @@
       <Project>{e8b417de-7574-4656-8b4b-07aed4fc4f42}</Project>
       <Name>M2Mqtt.PCL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Chatopia.Core.csproj">
+    <ProjectReference Include="..\Core\Topichat.Core.csproj">
       <Project>{0A040E22-3579-4341-B284-08AFC530EA20}</Project>
-      <Name>Chatopia.Core</Name>
+      <Name>Topichat.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
