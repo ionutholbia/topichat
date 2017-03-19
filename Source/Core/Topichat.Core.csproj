@@ -55,7 +55,7 @@
       <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\netstandard1.0\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="Serilog">
-      <HintPath>..\packages\Serilog.2.3.0\lib\netstandard1.0\Serilog.dll</HintPath>
+      <HintPath>..\packages\Serilog.2.4.0\lib\netstandard1.0\Serilog.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
