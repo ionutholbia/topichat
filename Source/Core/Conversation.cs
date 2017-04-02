@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
 
-namespace Chatopia.Core
+namespace Topichat.Core
 {
 
-	public class Conversation : INotifyPropertyChanged, IEnumerable<Message> {
+	public class Conversation : INotifyPropertyChanged, IEnumerable<Message> 
+    {
+        IBrokerConnection brokerConnection;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,12 +22,14 @@ namespace Chatopia.Core
             Messages.CollectionChanged += OnMessagesChanged;
         }
 
-        public Conversation(IEnumerable<Contact> otherParties) : this()
+        public Conversation(IBrokerConnection brokerConnection, IEnumerable<Contact> otherParties) : this()
         {
+            this.brokerConnection = brokerConnection;
             participants.AddRange(otherParties);
         }
 
-        public Conversation(params Contact[] otherParties) : this((IEnumerable<Contact>)otherParties)
+        public Conversation(IBrokerConnection brokerConnection, params Contact[] otherParties) 
+            : this(brokerConnection, (IEnumerable<Contact>)otherParties)
         {
         }
 

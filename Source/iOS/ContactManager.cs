@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Chatopia;
+using Topichat;
 
-namespace Chatopia.Ios
+namespace Topichat.Ios
 {
     public class ContactManager : IContacts
     {

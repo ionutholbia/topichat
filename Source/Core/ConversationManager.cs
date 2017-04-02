@@ -4,12 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt;
 
-namespace Chatopia.Core
+namespace Topichat.Core
 {
     public class ConversationManager : IConversationManager, IContacts
     {
         ObservableCollection<Contact> contacts;
         ObservableCollection<Conversation> conversations;
+        IBrokerConnection brokerConnection;
+
+        public ConversationManager(IBrokerConnection brokerConnection)
+        {
+            this.brokerConnection = brokerConnection;
+        }
 
         public Contact Me => DummyData.Me;
 
@@ -41,7 +47,7 @@ namespace Chatopia.Core
             var convo = conversations.FirstOrDefault(c => c.Participants.Where(p => p != Me).SequenceEqual(contacts));
             if (convo == null)
             {
-                convo = new Conversation(contacts);
+                convo = new Conversation(this.brokerConnection, contacts);
                 conversations.Add(convo);
             }
             return convo;

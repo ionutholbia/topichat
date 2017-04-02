@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Chatopia.Core
+namespace Topichat.Core
 {
     public class Message
     {

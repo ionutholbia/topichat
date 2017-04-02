@@ -9,7 +9,7 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
-namespace Chatopia.Ios
+namespace Topichat.Ios
 {
     [Register ("ConversationListViewController")]
     partial class ConversationListViewController

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Chatopia
+namespace Topichat
 {
 
 	public class Contact : INotifyPropertyChanged 

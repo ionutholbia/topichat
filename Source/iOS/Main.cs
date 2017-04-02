@@ -1,6 +1,6 @@
 using UIKit;
 
-namespace Chatopia.Ios {
+namespace Topichat.Ios {
 
 	public class EntryPoint {
 		static void Main (string [] args)

@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
 
-namespace Chatopia.Core 
+namespace Topichat.Core 
 {
 	public static class Extensions 
     {

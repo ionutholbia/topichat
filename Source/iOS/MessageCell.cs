@@ -1,9 +1,9 @@
 using Foundation;
 using System;
 using UIKit;
-using Chatopia.Core;
+using Topichat.Core;
 
-namespace Chatopia.Ios 
+namespace Topichat.Ios 
 {
 	public partial class MessageCell : UITableViewCell 
     {

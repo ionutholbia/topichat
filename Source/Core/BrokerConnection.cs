@@ -6,7 +6,7 @@ using Serilog;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
-namespace Chatopia.Core
+namespace Topichat.Core
 {
     public class BrokerConnection : IBrokerConnection
     {

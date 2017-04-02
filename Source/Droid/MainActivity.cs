@@ -2,7 +2,7 @@ using Android.App;
 using Android.Widget;
 using Android.OS;
 
-namespace Chatopia.Droid
+namespace Topichat.Droid
 {
     [Activity(Label = "Chatopia", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity

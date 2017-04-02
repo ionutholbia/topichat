@@ -5,9 +5,9 @@ using System.Reactive.Linq;
 
 using UIKit;
 using Foundation;
-using Chatopia.Core;
+using Topichat.Core;
 
-namespace Chatopia.Ios 
+namespace Topichat.Ios 
 {
     public partial class ConversationCell : UITableViewCell {
 

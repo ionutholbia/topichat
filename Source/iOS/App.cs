@@ -1,9 +1,9 @@
-﻿using Chatopia.Core;
+﻿using Topichat.Core;
 using Foundation;
 using UIKit;
 using uPLibrary.Networking.M2Mqtt;
 
-namespace Chatopia.Ios 
+namespace Topichat.Ios 
 {
 	// The UIApplicationDelegate for the application. This class is responsible for launching the
 	// User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
@@ -12,11 +12,11 @@ namespace Chatopia.Ios
 
         const string BrokerUrl = "ec2-54-212-229-1.us-west-2.compute.amazonaws.com";
        
-        public static IConversationManager conversationManager { get; private set; } = new ConversationManager ();
-
-        public static IContacts contactManager { get; private set; } = new ConversationManager();
-
         public static BrokerConnection brockerConnection = new BrokerConnection(new MqttClient(BrokerUrl), "+40744360800");
+
+        public static IConversationManager conversationManager { get; private set; } = new ConversationManager (brockerConnection);
+
+        public static IContacts contactManager { get; private set; } = new ConversationManager(brockerConnection);
 
 		public override UIWindow Window {
 			get;
@@ -27,6 +27,7 @@ namespace Chatopia.Ios
 		{
 			// Override point for customization after application launch.
 			// If not required for your application you can safely delete this method
+
 
 			return true;
 		}

@@ -6,7 +6,7 @@
     <ProjectGuid>{FE2E30A5-B0AA-4215-A327-05CBF8D94BBD}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>Chatopia.Droid</RootNamespace>
+    <RootNamespace>Topichat.Droid</RootNamespace>
     <AssemblyName>Chatopia.Droid</AssemblyName>
     <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>

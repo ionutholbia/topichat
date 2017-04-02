@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Chatopia.Core
+namespace Topichat.Core
 {
     public interface IBrokerConnection
     {

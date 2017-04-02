@@ -8,7 +8,7 @@ using UIKit;
 using Foundation;
 using System.Collections.Specialized;
 
-namespace Chatopia.Ios 
+namespace Topichat.Ios 
 {
 	public delegate UITableViewCell GetCellCallback (UITableView tableView, NSIndexPath indexPath, object data);
 

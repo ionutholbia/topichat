@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
 using uPLibrary.Networking.M2Mqtt;
 using Moq;
-using Chatopia.Core;
+using Topichat.Core;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using System;
 using System.Text;
 
-namespace Chatopia.Core.UnitTest
+namespace Topichat.Core.UnitTest
 {
     [TestFixture]
     public class BrokerConnectionTest
