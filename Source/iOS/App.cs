@@ -12,11 +12,11 @@ namespace Topichat.Ios
 
         const string BrokerUrl = "ec2-54-212-229-1.us-west-2.compute.amazonaws.com";
        
-        public static BrokerConnection brockerConnection = new BrokerConnection(new MqttClient(BrokerUrl), "+40744360800");
+        public static IContacts contactManager { get; private set; } = new ContactManager();
 
-        public static IConversationManager conversationManager { get; private set; } = new ConversationManager (brockerConnection);
+        public static BrokerConnection brockerConnection = new BrokerConnection(new MqttClient(BrokerUrl), contactManager.Me.PhoneNumber);
 
-        public static IContacts contactManager { get; private set; } = new ConversationManager(brockerConnection);
+        public static IConversationManager conversationManager { get; private set; } = new ConversationManager (new StorageData(), contactManager.Me);
 
 		public override UIWindow Window {
 			get;
@@ -60,7 +60,11 @@ namespace Topichat.Ios
 
 		public override void WillTerminate (UIApplication application)
 		{
-			// Called when the application is about to terminate. Save data, if needed. See also DidEnterBackground.
+            // Called when the application is about to terminate. Save data, if needed. See also DidEnterBackground.
+            if (brockerConnection != null)
+            {
+                brockerConnection.Dispose();
+            }
 		}
 	}
 }

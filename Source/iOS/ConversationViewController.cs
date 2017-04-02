@@ -7,6 +7,7 @@ using System.Collections;
 using UIKit;
 using Foundation;
 using Topichat.Core;
+using System.Collections.Generic;
 
 namespace Topichat.Ios 
 {
@@ -54,7 +55,17 @@ namespace Topichat.Ios
 
         void SendButtonTouchUpInside(object sender, EventArgs e)
         {
-            Conversation.Add(new Message { TimeStamp = DateTime.UtcNow, Sender = App.contactManager.Me, Text = messageText.Text });
+            var message = new Message 
+            { 
+                TimeStamp = DateTime.UtcNow,
+                Sender = App.contactManager.Me,
+                Text = messageText.Text,
+                Receivers = Conversation.Participants.Where(p => p.PhoneNumber != App.contactManager.Me.PhoneNumber).ToList()
+            };
+
+            Conversation.Add(message);
+            App.brockerConnection.SendMessage(message);
+
             messageText.Text = "";
         }
 
@@ -97,7 +108,7 @@ namespace Topichat.Ios
 		{
 			var msg = data as Message;
 			if (msg != null) {
-                var cellId = msg.Sender == App.contactManager.Me ? MessageCell.OutgoingId : MessageCell.IncomingId;
+                var cellId = msg.Sender.PhoneNumber == App.contactManager.Me.PhoneNumber ? MessageCell.OutgoingId : MessageCell.IncomingId;
 				var cell = (MessageCell)tableView.DequeueReusableCell (cellId, indexPath);
 				cell.Message = msg;
 				return cell;
@@ -126,7 +137,7 @@ namespace Topichat.Ios
 			titleBinding = Conversation?.ObservePropertyValue (c => c.Participants)
 				.ObserveOn (SynchronizationContext.Current)
 				.Subscribe (participants =>
-                            Title = string.Join (", ", participants.Where (p => p != App.contactManager.Me))
+                            Title = string.Join (", ", participants.Where (p => p.PhoneNumber != App.contactManager.Me.PhoneNumber))
 				);
 		}
 

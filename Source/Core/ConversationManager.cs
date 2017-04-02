@@ -1,33 +1,20 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using uPLibrary.Networking.M2Mqtt;
 
 namespace Topichat.Core
 {
-    public class ConversationManager : IConversationManager, IContacts
+    public class ConversationManager : IConversationManager
     {
-        ObservableCollection<Contact> contacts;
         ObservableCollection<Conversation> conversations;
-        IBrokerConnection brokerConnection;
 
-        public ConversationManager(IBrokerConnection brokerConnection)
+        readonly IStorageData storageData;
+        readonly Contact me;
+
+        public ConversationManager(IStorageData storageData, Contact me)
         {
-            this.brokerConnection = brokerConnection;
-        }
-
-        public Contact Me => DummyData.Me;
-
-        public ObservableCollection<Contact> GetContacts()
-        {
-            if (contacts == null)
-            {
-                contacts = new ObservableCollection<Contact>();
-                DummyData.GetContacts(contacts);
-            }
-
-            return contacts;
+            this.storageData = storageData;
+            this.me = me;
         }
 
         public ObservableCollection<Conversation> GetConversations()
@@ -35,7 +22,7 @@ namespace Topichat.Core
             if (conversations == null)
             {
                 conversations = new ObservableCollection<Conversation>();
-                DummyData.GetConversations(conversations);
+                this.storageData.GetConversations(conversations);
             }
 
             return conversations;
@@ -44,10 +31,10 @@ namespace Topichat.Core
         public async Task<Conversation> StartConversation(params Contact[] contacts)
         {
             await Task.Delay(500);
-            var convo = conversations.FirstOrDefault(c => c.Participants.Where(p => p != Me).SequenceEqual(contacts));
+            var convo = conversations.FirstOrDefault(c => c.Participants.Where(p => p != this.me).SequenceEqual(contacts));
             if (convo == null)
             {
-                convo = new Conversation(this.brokerConnection, contacts);
+                convo = new Conversation(contacts);
                 conversations.Add(convo);
             }
             return convo;

@@ -1,26 +1,43 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Topichat;
 
 namespace Topichat.Ios
 {
     public class ContactManager : IContacts
     {
-        public ContactManager()
-        {
-        }
+        static readonly Contact[] dummyContacts = new[] {
+            new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "+40744000000" },
+            new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "+40744111111" },
+            new Contact { FirstName = "Andrei", LastName = "Ionescu", PhoneNumber = "+40744222222" },
+            new Contact { FirstName = "Paul", LastName = "Matei", PhoneNumber = "+40744333333" },
+            new Contact { FirstName = "Adrian", LastName = "Maxim", PhoneNumber = "+40744444444" }
+        };
 
-        public Contact Me
+        readonly Contact me = new Contact
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+            FirstName = "Me",
+            LastName = "User",
+            PhoneNumber = "+40744360800"
+        };
+
+        public Contact Me => this.me;
 
         public ObservableCollection<Contact> GetContacts()
         {
-            throw new NotImplementedException();
+            var contacts = new ObservableCollection<Contact>();
+            GetContacts(contacts);
+            return contacts;
+        }
+
+        async Task GetContacts(ObservableCollection<Contact> contacts)
+        {
+            foreach (var contact in dummyContacts)
+            {
+                await Task.Delay(500);
+                contacts.Add(contact);
+            }
         }
     }
 }

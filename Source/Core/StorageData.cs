@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 namespace Topichat.Core 
 {
-    public class DummyData
+    public class StorageData : IStorageData
     {
-        static readonly Contact me = new Contact
-        {
-            FirstName = "Me",
-            LastName = "User",
-            PhoneNumber = "+40744360800"
-		};
-
 		static readonly Contact [] dummyContacts = new[] {
 			new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "+40744000000" },
 			new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "+40744111111" },
@@ -22,7 +14,14 @@ namespace Topichat.Core
 			new Contact { FirstName = "Adrian", LastName = "Maxim", PhoneNumber = "+40744444444" },
 		};
 
-		static readonly Conversation [] dummyConversations = new[] {
+        static readonly Contact me = new Contact
+        {
+            FirstName = "Me",
+            LastName = "User",
+            PhoneNumber = "+40744360800"
+        };
+        		
+        static readonly Conversation [] dummyConversations = new[] {
             new Conversation {
                 new Message {
                     TimeStamp = DateTime.UtcNow.AddMonths (-1),
@@ -38,26 +37,16 @@ namespace Topichat.Core
 			new Conversation {
 				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = dummyContacts [1], Text = "Sal!"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = me, Text = "Esti?"},
-			},
+			}
 		};
 
-		public static Contact Me => me;
-
-        public static async Task GetContacts (ObservableCollection<Contact> contacts)
-		{
-			foreach (var contact in dummyContacts) {
-				await Task.Delay (500);
-				contacts.Add (contact);
-			}
-		}
-
-        public static async Task GetConversations (ObservableCollection<Conversation> conversations)
+        public async Task GetConversations (ObservableCollection<Conversation> conversations)
 		{
 			foreach (var convo in dummyConversations) {
 				await Task.Delay (500);
 				conversations.Add (convo);
 			}
 		}
-	}
+    }
 }
 

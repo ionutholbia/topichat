@@ -28,7 +28,7 @@ namespace Topichat.Ios
 						.ObserveOn (SynchronizationContext.Current)
 						.Subscribe (participants => {
 							// Get the participants in the conversation who are not the current user
-                        var others = participants.Where (p => p != App.contactManager.Me).ToList ();
+                        var others = participants.Where (p => p.PhoneNumber != App.contactManager.Me.PhoneNumber).ToList ();
                         name.Text = string.Join (", ", others);
 						badge.Text = (others.Count == 1)? (others [0].FirstName.Substring (0, 1) + others [0].LastName.Substring (0, 1)) : others.Count.ToString ();
 						});

@@ -8,7 +8,7 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Topichat.Core
 {
-    public class BrokerConnection : IBrokerConnection
+    public sealed class BrokerConnection : IBrokerConnection, IDisposable
     {
         const string MqttTopicPrefix = "message";
 
@@ -52,7 +52,8 @@ namespace Topichat.Core
             else
             {
                 await Task.Run(() => this.mqttClient.Publish(
-                    $"{MqttTopicPrefix}/{message.Receivers[0].PhoneNumber}/{this.clientId}/{message.Topic}",
+                    //$"{MqttTopicPrefix}/{message.Receivers[0].PhoneNumber}/{this.clientId}/{message.Topic}",
+                    "message",
                     Encoding.UTF8.GetBytes(message.Text),
                     MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
                     false));
@@ -144,6 +145,14 @@ namespace Topichat.Core
                 Receivers = receivers,
                 Sender = new Contact { PhoneNumber = topicLevels[5] }
             };
+        }
+
+        public void Dispose()
+        {
+            if (this.mqttClient != null)
+            {
+                this.mqttClient.Disconnect();
+            }
         }
     }
 }

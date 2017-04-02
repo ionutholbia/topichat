@@ -11,8 +11,6 @@ namespace Topichat.Core
 
 	public class Conversation : INotifyPropertyChanged, IEnumerable<Message> 
     {
-        IBrokerConnection brokerConnection;
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
         public Conversation()
@@ -22,23 +20,15 @@ namespace Topichat.Core
             Messages.CollectionChanged += OnMessagesChanged;
         }
 
-        public Conversation(IBrokerConnection brokerConnection, IEnumerable<Contact> otherParties) : this()
+        public Conversation(IEnumerable<Contact> otherParties) : this()
         {
-            this.brokerConnection = brokerConnection;
             participants.AddRange(otherParties);
         }
 
-        public Conversation(IBrokerConnection brokerConnection, params Contact[] otherParties) 
-            : this(brokerConnection, (IEnumerable<Contact>)otherParties)
+        public Conversation(params Contact[] otherParties) : this((IEnumerable<Contact>)otherParties)
         {
         }
 
-		/// <summary>
-		/// Gets or sets the identifier for this <c>Conversation</c>.
-		/// </summary>
-		/// <remarks>
-		/// This property uniquely identifies a specific conversation on the server.
-		/// </remarks>
 		public string Id 
         {
 			get { return id; }

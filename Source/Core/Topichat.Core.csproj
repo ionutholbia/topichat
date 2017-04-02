@@ -31,13 +31,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Conversation.cs" />
     <Compile Include="Contact.cs" />
-    <Compile Include="DummyData.cs" />
+    <Compile Include="StorageData.cs" />
     <Compile Include="IConversationManager.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ConversationManager.cs" />
     <Compile Include="IContacts.cs" />
     <Compile Include="BrokerConnection.cs" />
     <Compile Include="IBrokerConnection.cs" />
+    <Compile Include="IStorageData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
