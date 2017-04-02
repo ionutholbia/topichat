@@ -49,13 +49,16 @@ namespace Chatopia.Ios
 			ci.Bottom += messageEntry.Frame.Height;
 			TableView.ContentInset = ci;
 
-			sendButton.TouchUpInside += (s, e) => {
-                Conversation.Add (new Message { TimeStamp = DateTime.UtcNow, Sender = App.contactManager.Me, Text = messageText.Text });
-				messageText.Text = "";
-			};
+            sendButton.TouchUpInside += SendButtonTouchUpInside;
 		}
 
-		public override void ViewWillAppear (bool animated)
+        void SendButtonTouchUpInside(object sender, EventArgs e)
+        {
+            Conversation.Add(new Message { TimeStamp = DateTime.UtcNow, Sender = App.contactManager.Me, Text = messageText.Text });
+            messageText.Text = "";
+        }
+
+        public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
 			TableView.AllowsSelection = (Conversation == null);

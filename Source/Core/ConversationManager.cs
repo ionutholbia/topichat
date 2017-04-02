@@ -1,20 +1,50 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt;
 
 namespace Chatopia.Core
 {
-    public class ConversationManager : IConversationManager
+    public class ConversationManager : IConversationManager, IContacts
     {
-        public ObservableCollection<Conversation> GetConversations()
+        ObservableCollection<Contact> contacts;
+        ObservableCollection<Conversation> conversations;
+
+        public Contact Me => DummyData.Me;
+
+        public ObservableCollection<Contact> GetContacts()
         {
-            throw new NotImplementedException();
+            if (contacts == null)
+            {
+                contacts = new ObservableCollection<Contact>();
+                DummyData.GetContacts(contacts);
+            }
+
+            return contacts;
         }
 
-        public Task<Conversation> StartConversation(params Contact[] contacts)
+        public ObservableCollection<Conversation> GetConversations()
         {
-            throw new NotImplementedException();
+            if (conversations == null)
+            {
+                conversations = new ObservableCollection<Conversation>();
+                DummyData.GetConversations(conversations);
+            }
+
+            return conversations;
+        }
+
+        public async Task<Conversation> StartConversation(params Contact[] contacts)
+        {
+            await Task.Delay(500);
+            var convo = conversations.FirstOrDefault(c => c.Participants.Where(p => p != Me).SequenceEqual(contacts));
+            if (convo == null)
+            {
+                convo = new Conversation(contacts);
+                conversations.Add(convo);
+            }
+            return convo;
         }
     }
 }

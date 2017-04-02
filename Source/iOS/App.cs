@@ -1,6 +1,7 @@
 ﻿using Chatopia.Core;
 using Foundation;
 using UIKit;
+using uPLibrary.Networking.M2Mqtt;
 
 namespace Chatopia.Ios 
 {
@@ -9,9 +10,13 @@ namespace Chatopia.Ios
 	[Register ("App")]
 	public class App : UIApplicationDelegate {
 
-        public static IConversationManager conversationManager { get; private set; } = new DummyData ();
+        const string BrokerUrl = "ec2-54-212-229-1.us-west-2.compute.amazonaws.com";
+       
+        public static IConversationManager conversationManager { get; private set; } = new ConversationManager ();
 
-        public static IContacts contactManager { get; private set; } = new DummyData();
+        public static IContacts contactManager { get; private set; } = new ConversationManager();
+
+        public static BrokerConnection brockerConnection = new BrokerConnection(new MqttClient(BrokerUrl), "+40744360800");
 
 		public override UIWindow Window {
 			get;

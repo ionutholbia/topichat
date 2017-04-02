@@ -8,10 +8,9 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Chatopia.Core
 {
-    public class BrokerConnection
+    public class BrokerConnection : IBrokerConnection
     {
         const string MqttTopicPrefix = "message";
-        const string BrokerUrl = "";
 
         readonly IMqttClient mqttClient;
         readonly string clientId;
@@ -28,7 +27,37 @@ namespace Chatopia.Core
             this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{this.clientId}" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
         }
 
-        public Action<Message> MessageReceived;
+        public Action<Message> MessageReceived { get; set;}
+
+        public async Task SendMessage(Message message)
+        {
+            if (message.Receivers.Count > 1)
+            {
+                var receiversStrings = "";
+                foreach (var receiver in message.Receivers)
+                {
+                    receiversStrings += receiver.PhoneNumber + "-";
+                }
+                receiversStrings.Remove(receiversStrings.Length - 1);
+
+                foreach (var receiver in message.Receivers)
+                {
+                    await Task.Run(() => this.mqttClient.Publish(
+                        $"{MqttTopicPrefix}/{receiver.PhoneNumber}/{message.GroupId}/{message.Topic}/{receiversStrings}/{this.clientId}",
+                        Encoding.UTF8.GetBytes(message.Text),
+                        MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
+                        false));
+                }
+            }
+            else
+            {
+                await Task.Run(() => this.mqttClient.Publish(
+                    $"{MqttTopicPrefix}/{message.Receivers[0].PhoneNumber}/{this.clientId}/{message.Topic}",
+                    Encoding.UTF8.GetBytes(message.Text),
+                    MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
+                    false));
+            }
+        }
 
         void MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs eventArgs)
         {
@@ -115,36 +144,6 @@ namespace Chatopia.Core
                 Receivers = receivers,
                 Sender = new Contact { PhoneNumber = topicLevels[5] }
             };
-        }
-
-        public async Task SendMessage(Message message)
-        {
-            if (message.Receivers.Count > 1)
-            {
-                var receiversStrings = "";
-                foreach (var receiver in message.Receivers)
-                {
-                    receiversStrings += receiver.PhoneNumber + "-";
-                }
-                receiversStrings.Remove(receiversStrings.Length - 1);
-
-                foreach (var receiver in message.Receivers)
-                {
-                    await Task.Run(() => this.mqttClient.Publish(
-                        $"{MqttTopicPrefix}/{receiver.PhoneNumber}/{message.GroupId}/{message.Topic}/{receiversStrings}/{this.clientId}",
-                        Encoding.UTF8.GetBytes(message.Text),
-                        MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
-                        false));                   
-                }
-            }
-            else
-            {
-                await Task.Run(() => this.mqttClient.Publish(
-                    $"{MqttTopicPrefix}/{message.Receivers[0].PhoneNumber}/{this.clientId}/{message.Topic}",
-                    Encoding.UTF8.GetBytes(message.Text),
-                    MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
-                    false));
-            }                
         }
     }
 }

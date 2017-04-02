@@ -37,6 +37,7 @@
     <Compile Include="ConversationManager.cs" />
     <Compile Include="IContacts.cs" />
     <Compile Include="BrokerConnection.cs" />
+    <Compile Include="IBrokerConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

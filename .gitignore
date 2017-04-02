@@ -10,3 +10,5 @@
 /Source/iOS/obj
 /Source/packages
 /Source/.vs/Topichat/v14
+
+*.userprefs

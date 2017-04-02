@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Chatopia.Core 
 {
-    public class DummyData : IConversationManager, IContacts
+    public class DummyData
     {
 		static readonly Contact me = new Contact {
 			FirstName = "Me",
@@ -39,21 +39,9 @@ namespace Chatopia.Core
 			},
 		};
 
-		public Contact Me => me;
+		public static Contact Me => me;
 
-		// On a real IServerConnection, we'd prolly also want to keep these as a local cache of data.
-		ObservableCollection<Contact> contacts;
-		ObservableCollection<Conversation> conversations;
-
-		public ObservableCollection<Contact> GetContacts ()
-		{
-			if (contacts == null) {
-				contacts = new ObservableCollection<Contact> ();
-				YieldContacts ();
-			}
-			return contacts;
-		}
-		async void YieldContacts ()
+        public static async Task GetContacts (ObservableCollection<Contact> contacts)
 		{
 			foreach (var contact in dummyContacts) {
 				await Task.Delay (500);
@@ -61,31 +49,12 @@ namespace Chatopia.Core
 			}
 		}
 
-		public ObservableCollection<Conversation> GetConversations ()
-		{
-			if (conversations == null) {
-				conversations = new ObservableCollection<Conversation> ();
-				YieldConversations ();
-			}
-			return conversations;
-		}
-		async void YieldConversations ()
+        public static async Task GetConversations (ObservableCollection<Conversation> conversations)
 		{
 			foreach (var convo in dummyConversations) {
 				await Task.Delay (500);
 				conversations.Add (convo);
 			}
-		}
-
-		public async Task<Conversation> StartConversation (params Contact [] contacts)
-		{
-			await Task.Delay (500);
-			var convo = dummyConversations.FirstOrDefault (c => c.Participants.Where (p => p != Me).SequenceEqual (contacts));
-			if (convo == null) {
-				convo = new Conversation (contacts);
-				conversations.Add (convo);
-			}
-			return convo;
 		}
 	}
 }
