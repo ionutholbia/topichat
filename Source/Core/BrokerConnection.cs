@@ -20,11 +20,10 @@ namespace Topichat.Core
             this.mqttClient = mqttClient;
             this.clientId = clientId;
 
-            this.mqttClient.MqttMsgPublishReceived += MqttMsgPublishReceived;
-
             this.mqttClient.Connect(clientId);
 
-            this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{this.clientId}" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+            this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{this.clientId}" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+            this.mqttClient.MqttMsgPublishReceived += MqttMsgPublishReceived;
         }
 
         public Action<Message> MessageReceived { get; set;}
@@ -55,7 +54,7 @@ namespace Topichat.Core
                     //$"{MqttTopicPrefix}/{message.Receivers[0].PhoneNumber}/{this.clientId}/{message.Topic}",
                     "message",
                     Encoding.UTF8.GetBytes(message.Text),
-                    MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
+                    MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE,
                     false));
             }
         }
@@ -64,8 +63,9 @@ namespace Topichat.Core
         {
             try
             {
-                var message = DecodeMessage(eventArgs);
-                MessageReceived?.Invoke(message);
+                //var message = DecodeMessage(eventArgs);
+                var message = Encoding.UTF8.GetString(eventArgs.Message, 0, eventArgs.Message.Length);
+                //MessageReceived?.Invoke(message);
             }
             catch (Exception ex)
             {
