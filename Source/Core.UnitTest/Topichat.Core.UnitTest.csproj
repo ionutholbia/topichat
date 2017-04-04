@@ -35,15 +35,9 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.7.8\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrokerConnectionTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.PCL.csproj">
-      <Project>{e8b417de-7574-4656-8b4b-07aed4fc4f42}</Project>
-      <Name>M2Mqtt.PCL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Topichat.Core.csproj">
       <Project>{0A040E22-3579-4341-B284-08AFC530EA20}</Project>
       <Name>Topichat.Core</Name>
@@ -51,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConversationTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

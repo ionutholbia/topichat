@@ -8,22 +8,26 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Topichat.Core
 {
-    public sealed class BrokerConnection : IBrokerConnection, IDisposable
+    public sealed class BrokerConnection : IDisposable
     {
+        const string BrokerUrl = "ec2-54-212-229-1.us-west-2.compute.amazonaws.com";
+
         const string MqttTopicPrefix = "message";
 
-        readonly IMqttClient mqttClient;
+        readonly MqttClient mqttClient;
         readonly string clientId;
 
-        public BrokerConnection(IMqttClient mqttClient, string clientId)
+        public BrokerConnection(string clientId)
         {
-            this.mqttClient = mqttClient;
+            this.mqttClient = new MqttClient(BrokerUrl);
             this.clientId = clientId;
 
-            this.mqttClient.Connect(clientId);
-
-            this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{this.clientId}" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
             this.mqttClient.MqttMsgPublishReceived += MqttMsgPublishReceived;
+            this.mqttClient.Connect(clientId);
+            if (this.mqttClient.IsConnected)
+            {
+                this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{this.clientId}" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+            }
         }
 
         public Action<Message> MessageReceived { get; set;}
@@ -51,8 +55,7 @@ namespace Topichat.Core
             else
             {
                 await Task.Run(() => this.mqttClient.Publish(
-                    //$"{MqttTopicPrefix}/{message.Receivers[0].PhoneNumber}/{this.clientId}/{message.Topic}",
-                    "message",
+                    $"{MqttTopicPrefix}/{message.Receivers[0].PhoneNumber}/{this.clientId}/{message.Topic}",
                     Encoding.UTF8.GetBytes(message.Text),
                     MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE,
                     false));
@@ -63,9 +66,8 @@ namespace Topichat.Core
         {
             try
             {
-                //var message = DecodeMessage(eventArgs);
-                var message = Encoding.UTF8.GetString(eventArgs.Message, 0, eventArgs.Message.Length);
-                //MessageReceived?.Invoke(message);
+                var message = DecodeMessage(eventArgs);
+                MessageReceived?.Invoke(message);
             }
             catch (Exception ex)
             {

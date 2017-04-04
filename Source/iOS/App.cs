@@ -1,7 +1,6 @@
 ﻿using Topichat.Core;
 using Foundation;
 using UIKit;
-using uPLibrary.Networking.M2Mqtt;
 
 namespace Topichat.Ios 
 {
@@ -9,12 +8,10 @@ namespace Topichat.Ios
 	// User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
 	[Register ("App")]
 	public class App : UIApplicationDelegate {
-
-        const string BrokerUrl = "ec2-54-212-229-1.us-west-2.compute.amazonaws.com";
-       
+           
         public static IContacts contactManager { get; private set; } = new ContactManager();
 
-        public static BrokerConnection brockerConnection = new BrokerConnection(new MqttClient(BrokerUrl), contactManager.Me.PhoneNumber);
+        public static BrokerConnection brockerConnection = new BrokerConnection(contactManager.Me.PhoneNumber);
 
         public static IConversationManager conversationManager { get; private set; } = new ConversationManager (new StorageData(), contactManager.Me);
 

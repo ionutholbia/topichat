@@ -1,10 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Text;
+using NUnit.Framework;
 using uPLibrary.Networking.M2Mqtt;
 using Moq;
-using Topichat.Core;
 using uPLibrary.Networking.M2Mqtt.Messages;
-using System;
-using System.Text;
 
 namespace Topichat.Core.UnitTest
 {
@@ -12,14 +10,14 @@ namespace Topichat.Core.UnitTest
     public class BrokerConnectionTest
     {
         BrokerConnection brokerConnection;
-        Mock<IMqttClient> mqttClientMock;
+        Mock<MqttClient> mqttClientMock;
 
         [SetUp]
         public void SetUp()
         {
-            this.mqttClientMock = new Mock<IMqttClient>();
+            this.mqttClientMock = new Mock<MqttClient>();
 
-            this.brokerConnection = new BrokerConnection(this.mqttClientMock.Object, "0040744360800");
+            this.brokerConnection = new BrokerConnection("0040744360800");
         }
 
         [Test]

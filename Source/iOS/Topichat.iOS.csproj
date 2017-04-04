@@ -98,6 +98,11 @@
     <Reference Include="Serilog">
       <HintPath>..\packages\Serilog.2.4.0\lib\netstandard1.3\Serilog.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="M2Mqtt">
+      <HintPath>..\packages\M2MqttDotnetCore.1.0.2\lib\M2Mqtt.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json">
@@ -142,20 +147,11 @@
     <BundleResource Include="Resources\settings%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.iOS.csproj">
-      <Project>{78378739-a0b3-47ad-b782-446efc2f5633}</Project>
-      <Name>M2Mqtt.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
-    <ProjectReference Include="..\..\3rdParty\paho.mqtt.m2mqtt\M2Mqtt\M2Mqtt.PCL.csproj">
-      <Project>{e8b417de-7574-4656-8b4b-07aed4fc4f42}</Project>
-      <Name>M2Mqtt.PCL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Topichat.Core.csproj">
       <Project>{0A040E22-3579-4341-B284-08AFC530EA20}</Project>
       <Name>Topichat.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Shared\Topichat.Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Topichat.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

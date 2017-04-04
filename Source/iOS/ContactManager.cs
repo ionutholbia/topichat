@@ -19,7 +19,7 @@ namespace Topichat.Ios
         {
             FirstName = "Me",
             LastName = "User",
-            PhoneNumber = "+40744360800"
+            PhoneNumber = "0040744360800"
         };
 
         public Contact Me => this.me;
