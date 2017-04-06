@@ -2,7 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/BuildOutput/bin/Debug
+/BuildOutput/
 /Source/.vs/Chatopia/v14
 /Source/Core/obj/Debug
 /Source/Core.UnitTest/obj/Debug
