@@ -70,7 +70,33 @@ namespace Topichat.Core.UnitTest
         }
 
         [Test]
-        public void Group_MessageReceived()
+        public void MessageReceived_One2One()
+        {
+        	var message = new Message();
+        	this.brokerConnection.MessageReceived += (obj) =>
+        	{
+        		message = obj;
+        	};
+
+        	this.mqttClientMock.Raise(mock => mock.MqttMsgPublishReceived += (sender, e) => { },
+        							  null,
+        							  new MqttMsgPublishEventArgs(
+        								  "message/0040744360800/14c9ed4e-3371-4533-91bf-af63e0e3a88a/VacantaLaMunte/111/999",
+        								  Encoding.UTF8.GetBytes("Salut"),
+        								  false,
+        								  MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
+        								  false));
+
+        	Assert.AreEqual("Salut", message.Text);
+        	Assert.AreEqual("VacantaLaMunte", message.Topic);
+        	Assert.AreEqual("999", message.Sender.PhoneNumber);
+        	Assert.AreEqual(1, message.Receivers.Count);
+        	Assert.AreEqual("111", message.Receivers[0].PhoneNumber);
+        	Assert.AreEqual("0040744360800", message.Receivers[4].PhoneNumber);
+        }
+
+        [Test]
+        public void MessageReceived_Group()
         {
             var message = new Message();
             this.brokerConnection.MessageReceived += (obj) =>

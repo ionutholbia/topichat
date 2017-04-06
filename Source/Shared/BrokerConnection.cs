@@ -8,7 +8,7 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Topichat.Core
 {
-    public sealed class BrokerConnection : IDisposable
+    public sealed class BrokerConnection : IBrokerConnection, IDisposable
     {
         const string BrokerUrl = "ec2-54-212-229-1.us-west-2.compute.amazonaws.com";
 
@@ -26,7 +26,7 @@ namespace Topichat.Core
             this.mqttClient.Connect(clientId);
             if (this.mqttClient.IsConnected)
             {
-                this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{this.clientId}" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+                this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{this.clientId}/#" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
             }
         }
 
@@ -34,30 +34,19 @@ namespace Topichat.Core
 
         public async Task SendMessage(Message message)
         {
-            if (message.Receivers.Count > 1)
+            var receiversStrings = "";
+            foreach (var receiver in message.Receivers)
             {
-                var receiversStrings = "";
-                foreach (var receiver in message.Receivers)
-                {
-                    receiversStrings += receiver.PhoneNumber + "-";
-                }
-                receiversStrings.Remove(receiversStrings.Length - 1);
-
-                foreach (var receiver in message.Receivers)
-                {
-                    await Task.Run(() => this.mqttClient.Publish(
-                        $"{MqttTopicPrefix}/{receiver.PhoneNumber}/{message.GroupId}/{message.Topic}/{receiversStrings}/{this.clientId}",
-                        Encoding.UTF8.GetBytes(message.Text),
-                        MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
-                        false));
-                }
+                receiversStrings += receiver.PhoneNumber + "-";
             }
-            else
+            receiversStrings = receiversStrings.Remove(receiversStrings.Length - 1);
+
+            foreach (var receiver in message.Receivers)
             {
                 await Task.Run(() => this.mqttClient.Publish(
-                    $"{MqttTopicPrefix}/{message.Receivers[0].PhoneNumber}/{this.clientId}/{message.Topic}",
+                    $"{MqttTopicPrefix}/{receiver.PhoneNumber}/{message.ConversationId}/{message.Topic}/{receiversStrings}/{this.clientId}",
                     Encoding.UTF8.GetBytes(message.Text),
-                    MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE,
+                    MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
                     false));
             }
         }
@@ -84,7 +73,7 @@ namespace Topichat.Core
             var indexSeparator = data.IndexOf(separator);
             if (indexSeparator == -1)
             {
-                throw new Exception($"Invalid mqtt topic {data}.");
+                return new List<string> { data };
             }
 
             while (indexSeparator != -1)
@@ -114,35 +103,17 @@ namespace Topichat.Core
         Message DecodeMessage(MqttMsgPublishEventArgs eventArgs)
         {
             var topicLevels = SplitString(eventArgs.Topic, '/');
-
-            if (topicLevels.Count == 6)
-            {
-                return DecodeGroupMessage(topicLevels, Encoding.UTF8.GetString(eventArgs.Message, 0, eventArgs.Message.Length));
-            }
-
-            if (topicLevels.Count != 4)
-            {
-                throw new Exception($"Invalid mqtt message structure {eventArgs}.");
-            }
-
-            return new Message
-            {
-                Text = Encoding.UTF8.GetString(eventArgs.Message, 0, eventArgs.Message.Length),
-                Topic = topicLevels[3],
-                Receivers = new List<Contact> { new Contact { PhoneNumber = topicLevels[1] } },
-                Sender = new Contact { PhoneNumber = topicLevels[2] }
-            };
+            return DecodeGroupMessage(topicLevels, Encoding.UTF8.GetString(eventArgs.Message, 0, eventArgs.Message.Length));
         }
 
         Message DecodeGroupMessage(List<string> topicLevels, string text)
         {
             var receivers = DecodeOtherReceivers(topicLevels[4]);
-            receivers.Add(new Contact { PhoneNumber = topicLevels[1] });
 
             return new Message
             {
                 Text = text,
-                GroupId = topicLevels[2],
+                ConversationId = topicLevels[2],
                 Topic = topicLevels[3],
                 Receivers = receivers,
                 Sender = new Contact { PhoneNumber = topicLevels[5] }

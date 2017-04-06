@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
+using System;
 
 namespace Topichat.Core
 {
@@ -13,14 +12,15 @@ namespace Topichat.Core
     {
 		public event PropertyChangedEventHandler PropertyChanged;
 
-        public Conversation()
+        public Conversation(string id)
         {
             participants = new List<Contact>();
             Messages = new ObservableCollection<Message>();
             Messages.CollectionChanged += OnMessagesChanged;
+            Id = id;
         }
 
-        public Conversation(IEnumerable<Contact> otherParties) : this()
+        public Conversation(IEnumerable<Contact> otherParties) : this(Guid.NewGuid().ToString())
         {
             participants.AddRange(otherParties);
         }
@@ -29,18 +29,7 @@ namespace Topichat.Core
         {
         }
 
-		public string Id 
-        {
-			get { return id; }
-			set {
-				if (id != value) 
-                {
-					id = value;
-					PropertyChanged?.Invoke (this, new PropertyChangedEventArgs (nameof (Id)));
-				}
-			}
-		}
-		string id;
+        public string Id { get; private set; }
 
         public string Topic { get;  set; }
 
@@ -70,6 +59,7 @@ namespace Topichat.Core
 		// The following members make it so we can initialize a Conversation with the collection initializer
 		public void Add (Message msg)
 		{
+            msg.ConversationId = Id;
 			Messages.Add (msg);
 		}
 

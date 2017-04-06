@@ -15,6 +15,6 @@ namespace Topichat.Core
     
         public string Text { get; set; }
 
-        public string GroupId { get; set; }
+        public string ConversationId { get; set; }
     }
 }

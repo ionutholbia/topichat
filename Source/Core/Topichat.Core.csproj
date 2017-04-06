@@ -36,6 +36,7 @@
     <Compile Include="ConversationManager.cs" />
     <Compile Include="IContacts.cs" />
     <Compile Include="IStorageData.cs" />
+    <Compile Include="IBrockerManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

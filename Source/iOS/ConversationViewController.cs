@@ -60,6 +60,7 @@ namespace Topichat.Ios
                 TimeStamp = DateTime.UtcNow,
                 Sender = App.contactManager.Me,
                 Text = messageText.Text,
+                Topic = "Default",
                 Receivers = Conversation.Participants.Where(p => p.PhoneNumber != App.contactManager.Me.PhoneNumber).ToList()
             };
 
@@ -151,7 +152,7 @@ namespace Topichat.Ios
 			DataSource.Binding = null;
 
 			// Create or resume the conversation
-			Conversation = await App.conversationManager.StartConversation (contact);
+            Conversation = await App.conversationManager.StartConversation (new List<Contact> { contact });
 			SetDataBinding ();
 
 			// Enable send button

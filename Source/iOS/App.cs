@@ -13,7 +13,10 @@ namespace Topichat.Ios
 
         public static BrokerConnection brockerConnection = new BrokerConnection(contactManager.Me.PhoneNumber);
 
-        public static IConversationManager conversationManager { get; private set; } = new ConversationManager (new StorageData(), contactManager.Me);
+        public static IConversationManager conversationManager { get; private set; } = new ConversationManager (
+            brockerConnection, 
+            new StorageData(),
+            contactManager.Me);
 
 		public override UIWindow Window {
 			get;

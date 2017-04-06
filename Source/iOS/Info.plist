@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>Evolve Chat</string>
+	<string>Topichat</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.xamarin.evolve-chat</string>
+	<string>com.topichat</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -13,7 +13,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>9.0</string>
+	<string>10.3</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>

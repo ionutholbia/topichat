@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,11 +12,15 @@ namespace Topichat.Core
 
         readonly IStorageData storageData;
         readonly Contact me;
+        readonly IBrokerConnection brokerConnection;
 
-        public ConversationManager(IStorageData storageData, Contact me)
+        public ConversationManager(IBrokerConnection brokerManager, IStorageData storageData, Contact me)
         {
+            this.brokerConnection = brokerManager;
             this.storageData = storageData;
             this.me = me;
+
+            this.brokerConnection.MessageReceived += BrokerConnectionMessageReceived;
         }
 
         public ObservableCollection<Conversation> GetConversations()
@@ -28,16 +34,28 @@ namespace Topichat.Core
             return conversations;
         }
 
-        public async Task<Conversation> StartConversation(params Contact[] contacts)
+        public async Task<Conversation> StartConversation(List<Contact> contacts)
         {
-            await Task.Delay(500);
-            var convo = conversations.FirstOrDefault(c => c.Participants.Where(p => p != this.me).SequenceEqual(contacts));
-            if (convo == null)
+            var conversation = conversations.FirstOrDefault(c => c.Participants.Where(p => p != this.me).SequenceEqual(contacts));
+            return conversation ?? NewConversation(contacts);
+        }
+
+        void BrokerConnectionMessageReceived(Message message)
+        {
+            var conversation = conversations.FirstOrDefault(c => c.Id == message.ConversationId);
+            if (conversation == null)
             {
-                convo = new Conversation(contacts);
-                conversations.Add(convo);
+                conversation = NewConversation(message.Receivers);
             }
-            return convo;
+
+            conversation.Add(message);
+        }
+
+        Conversation NewConversation(List<Contact> contacts)
+        {
+            var conversation = new Conversation(contacts);
+            conversations.Add(conversation);
+            return conversation;
         }
     }
 }
