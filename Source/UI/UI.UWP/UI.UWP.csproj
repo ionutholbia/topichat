@@ -7,7 +7,7 @@
     <ProjectGuid>{D04E8246-CEB7-4A6B-8845-9064BDF3722E}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UI.UWP</RootNamespace>
+    <RootNamespace>Topichat.UI.UWP</RootNamespace>
     <AssemblyName>UI.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>

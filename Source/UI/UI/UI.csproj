@@ -8,7 +8,7 @@
     <ProjectGuid>{865F63A2-BD3A-4FC7-9EED-4DBB281C6E23}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UI</RootNamespace>
+    <RootNamespace>Topichat.UI</RootNamespace>
     <AssemblyName>UI</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>

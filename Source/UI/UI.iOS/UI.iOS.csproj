@@ -8,7 +8,7 @@
     <ProjectGuid>{2F49A098-35CD-4B7F-8FD5-D5A76BC5206F}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>UI.iOS</RootNamespace>
+    <RootNamespace>Topichat.UI.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>UI.iOS</AssemblyName>
     <NuGetPackageImportStamp>
