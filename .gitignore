@@ -21,3 +21,9 @@
 /Source/.vs/config
 *.user
 /Source/UI/UI.iOS/bin
+
+Source/App/App/obj/
+
+Source/App/Droid/obj/
+
+Source/App/iOS/obj/
