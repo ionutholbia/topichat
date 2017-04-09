@@ -13,3 +13,10 @@
 /Source/.vs/Topichat/v14
 
 *.userprefs
+*.suo
+/Source/UI/UI/obj/Debug
+/Source/UI/UI.Android/obj/Debug
+/Source/UI/UI.iOS/obj/iPhone/Debug
+/Source/UI/UI.UWP/obj/x86/Debug
+/Source/.vs/config
+/Source/Droid/Topichat.Droid.csproj.user
