@@ -8,7 +8,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Topichat.Core</RootNamespace>
     <AssemblyName>Chatopia</AssemblyName>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +38,7 @@
     <Compile Include="IContacts.cs" />
     <Compile Include="IStorageData.cs" />
     <Compile Include="IBrockerManager.cs" />
+    <Compile Include="ContactManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

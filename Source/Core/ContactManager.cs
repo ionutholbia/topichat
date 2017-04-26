@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Topichat;
 
-namespace Topichat.Ios
+namespace Topichat.Core
 {
     public class ContactManager : IContacts
     {
@@ -35,7 +35,6 @@ namespace Topichat.Ios
         {
             foreach (var contact in dummyContacts)
             {
-                await Task.Delay(500);
                 contacts.Add(contact);
             }
         }

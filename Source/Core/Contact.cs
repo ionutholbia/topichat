@@ -69,6 +69,8 @@ namespace Topichat
         {
             return $"{FirstName[0]}{LastName[0]}";
         }
+
+        public string ImageUrl { get; set; }
 	}
 }
 

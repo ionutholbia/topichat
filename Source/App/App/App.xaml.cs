@@ -1,14 +1,17 @@
 ﻿using Xamarin.Forms;
+using Topichat.Core;
 
 namespace App
 {
     public partial class App : Application
     {
+        internal static ContactManager contactManager = new ContactManager();
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new AppPage();
+            MainPage = new HomePage();
         }
 
         protected override void OnStart()

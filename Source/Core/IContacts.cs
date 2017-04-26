@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace Topichat
+namespace Topichat.Core
 {
     public interface IContacts
     {
