@@ -117,6 +117,7 @@
       <Name>Topichat.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Shared\Topichat.Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Topichat.Shared.projitems')" />
   <Import Project="..\Shared.UnitTest\Topichat.Shared.UnitTest.projitems" Label="Shared" Condition="Exists('..\Shared.UnitTest\Topichat.Shared.UnitTest.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

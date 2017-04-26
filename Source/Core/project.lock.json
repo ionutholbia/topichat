@@ -389,7 +389,7 @@
           }
         }
       },
-      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
         "type": "package",
         "compile": {
           "ref/portable-net45+win8+wp8+wpa81/_._": {}
@@ -2338,17 +2338,15 @@
         "runtimes/win/lib/netstandard1.1/System.Runtime.InteropServices.RuntimeInformation.dll"
       ]
     },
-    "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
-      "sha512": "J4GUi3xZQLUBasNwZnjrffN8i5wpHrBtZoLG+OhRyGo/+YunMRWWtwoMDlUAIdmX0uRfpHIBDSV6zyr3yf00TA==",
+    "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
+      "sha512": "oIIXM4w2y3MiEZEXA+RTtfPV+SZ1ymbFdWppHlUciNdNIL0/Uo3HW9q9iN2O7T7KUmRdvjA7C2Gv4exAyW4zEQ==",
       "type": "package",
-      "path": "system.runtime.interopservices.windowsruntime/4.3.0",
+      "path": "system.runtime.interopservices.windowsruntime/4.0.1",
       "files": [
-        "System.Runtime.InteropServices.WindowsRuntime.4.3.0.nupkg.sha512",
+        "System.Runtime.InteropServices.WindowsRuntime.4.0.1.nupkg.sha512",
         "System.Runtime.InteropServices.WindowsRuntime.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
         "lib/net45/_._",
         "lib/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
         "lib/netstandard1.3/System.Runtime.InteropServices.WindowsRuntime.dll",
@@ -2357,12 +2355,6 @@
         "lib/wp80/_._",
         "lib/wpa81/_._",
         "lib/xamarinios1/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
         "ref/net45/_._",
         "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
         "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.xml",
@@ -2390,10 +2382,6 @@
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
         "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll"
       ]
     },
@@ -2968,7 +2956,6 @@
       "System.Resources.ResourceManager >= 4.3.0",
       "System.Runtime >= 4.3.0",
       "System.Runtime.Extensions >= 4.3.0",
-      "System.Runtime.InteropServices.WindowsRuntime >= 4.3.0",
       "System.Text.Encoding >= 4.3.0",
       "System.Text.Encoding.Extensions >= 4.3.0",
       "System.Text.RegularExpressions >= 4.3.0",
