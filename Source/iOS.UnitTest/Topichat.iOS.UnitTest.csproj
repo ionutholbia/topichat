@@ -88,15 +88,15 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.4.0.0\lib\netstandard1.3\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.7.8\lib\netstandard1.3\Moq.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Serilog">
       <HintPath>..\packages\Serilog.2.4.0\lib\netstandard1.3\Serilog.dll</HintPath>
     </Reference>
-    <Reference Include="M2MqttDotnetCore">
-      <HintPath>..\packages\M2MqttDotnetCore.1.0.3\lib\netstandard1.6\M2MqttDotnetCore.dll</HintPath>
+    <Reference Include="M2Mqtt">
+      <HintPath>..\packages\M2MqttDotnetCore.1.0.5\lib\netstandard1.6\M2Mqtt.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.7.9\lib\netstandard1.3\Moq.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
