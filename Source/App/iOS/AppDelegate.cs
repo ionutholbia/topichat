@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
 using UIKit;
+using Topichat.Forms;
 
 namespace App.iOS
 {
@@ -14,7 +15,7 @@ namespace App.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            LoadApplication(new App());
+            LoadApplication(new Topichat.Forms.App());
 
             return base.FinishedLaunching(app, options);
         }

@@ -1,7 +1,7 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 using Topichat.Core;
 
-namespace App
+namespace Topichat.Forms
 {
     public partial class App : Application
     {

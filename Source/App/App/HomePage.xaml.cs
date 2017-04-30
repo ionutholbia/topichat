@@ -1,6 +1,6 @@
 using Xamarin.Forms;
 
-namespace App
+namespace Topichat.Forms
 {
     public partial class HomePage : ContentPage
     {
