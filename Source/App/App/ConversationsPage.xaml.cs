@@ -2,11 +2,13 @@ using Xamarin.Forms;
 
 namespace Topichat.Forms
 {
-    public partial class HomePage : ContentPage
+    public partial class ConversationsPage : ContentPage
     {
-        public HomePage()
+        public ConversationsPage()
         {
             InitializeComponent();
+            BindingContext = new ConversationsPageViewModel();
+
             Navigation.PushModalAsync(new NavigationPage(new ContactsPage()));
         }
     }

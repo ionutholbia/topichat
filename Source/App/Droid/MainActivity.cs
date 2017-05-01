@@ -8,6 +8,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using ImageCircle.Forms.Plugin.Droid;
+using Topichat.Core;
+using Topichat.Shared;
 
 namespace App.Droid
 {
@@ -24,7 +26,13 @@ namespace App.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             ImageCircleRenderer.Init();
 
-            LoadApplication(new Topichat.Forms.App());
+           LoadApplication(new Topichat.Forms.App(
+                new ContactManager(),
+                new ConversationManager(
+
+					new BrokerConnection("00400744360800"),
+                    new StorageData(),
+                    new Contact { FirstName = "Ionut", LastName = "Holbia", PhoneNumber = "00400744360800" })));
         }
     }
 }

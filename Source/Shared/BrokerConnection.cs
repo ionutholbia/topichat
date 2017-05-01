@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Serilog;
+using Topichat.Core;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
-namespace Topichat.Core
+namespace Topichat.Shared
 {
     public sealed class BrokerConnection : IBrokerConnection, IDisposable
     {

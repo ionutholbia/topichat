@@ -6,6 +6,8 @@ using Foundation;
 using UIKit;
 using Topichat.Forms;
 using ImageCircle.Forms.Plugin.iOS;
+using Topichat.Shared;
+using Topichat.Core;
 
 namespace App.iOS
 {
@@ -17,7 +19,12 @@ namespace App.iOS
             global::Xamarin.Forms.Forms.Init();
             ImageCircleRenderer.Init();
 
-            LoadApplication(new Topichat.Forms.App());
+            LoadApplication(new Topichat.Forms.App(
+                new ContactManager(),
+                new ConversationManager(
+                    new BrokerConnection("00400744360800"),
+                    new StorageData(),
+                    new Contact { FirstName = "Ionut", LastName = "Holbia", PhoneNumber = "00400744360800" })));
 
             return base.FinishedLaunching(app, options);
         }

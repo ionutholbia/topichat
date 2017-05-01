@@ -1,6 +1,7 @@
 ﻿using Topichat.Core;
 using Foundation;
 using UIKit;
+using Topichat.Shared;
 
 namespace Topichat.Ios 
 {

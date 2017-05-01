@@ -5,14 +5,20 @@ namespace Topichat.Forms
 {
     public partial class App : Application
     {
-        internal static ContactManager contactManager = new ContactManager();
+        internal static IContacts ContactManager { get; private set; }
 
-        public App()
+        internal static IConversationManager ConversationManager { get; private set; }
+
+        public App(IContacts contactManager, IConversationManager conversationManager)
         {
+            ConversationManager = conversationManager;
+            ContactManager = contactManager;
+
             InitializeComponent();
 
-            MainPage = new HomePage();
+            MainPage = new ConversationsPage();
         }
+
 
         protected override void OnStart()
         {

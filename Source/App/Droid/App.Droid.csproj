@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\Shared\Topichat.Shared.projitems" Label="Shared" Condition="Exists('..\..\Shared\Topichat.Shared.projitems')" />
   <Import Project="..\..\packages\Xamarin.Build.Download.0.4.4\build\Xamarin.Build.Download.props" Condition="Exists('..\..\packages\Xamarin.Build.Download.0.4.4\build\Xamarin.Build.Download.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -122,6 +123,13 @@
     </Reference>
     <Reference Include="ImageCircle.Forms.Plugin.Android">
       <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\MonoAndroid10\ImageCircle.Forms.Plugin.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="M2Mqtt">
+      <HintPath>..\..\packages\M2MqttDotnetCore.1.0.5\lib\netstandard1.6\M2Mqtt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Serilog">
+      <HintPath>..\..\packages\Serilog.2.4.0\lib\netstandard1.3\Serilog.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

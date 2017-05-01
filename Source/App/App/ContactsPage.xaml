@@ -6,7 +6,7 @@
 			 x:Class="Topichat.Forms.ContactsPage" 
 			 Title="Contacts">
 	
-	<StackLayout Margin="20">
+	<StackLayout>
 		
 		<SearchBar x:Name="searchBar" Placeholder="Search" SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" />
 		<ListView ItemsSource="{Binding Contacts}" HasUnevenRows="true" ItemTapped="OnListViewItemTapped" ItemSelected="OnListViewItemSelected">

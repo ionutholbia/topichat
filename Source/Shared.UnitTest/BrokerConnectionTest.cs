@@ -3,8 +3,9 @@ using NUnit.Framework;
 using uPLibrary.Networking.M2Mqtt;
 using Moq;
 using uPLibrary.Networking.M2Mqtt.Messages;
+using Topichat.Core;
 
-namespace Topichat.Core.UnitTest
+namespace Topichat.Shared.UnitTest
 {
     [TestFixture]
     public class BrokerConnectionTest
