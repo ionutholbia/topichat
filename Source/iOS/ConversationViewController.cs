@@ -152,7 +152,7 @@ namespace Topichat.Ios
 			DataSource.Binding = null;
 
 			// Create or resume the conversation
-            Conversation = await App.conversationManager.StartConversation (new List<Contact> { contact });
+            Conversation = await App.conversationManager.StartConversation (new List<Contact> { contact }, "Default");
 			SetDataBinding ();
 
 			// Enable send button

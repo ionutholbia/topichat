@@ -22,7 +22,7 @@ namespace Topichat.Core
         };
         		
         static readonly Conversation [] dummyConversations = new[] {
-            new Conversation("id1") {
+            new Conversation("id1", "Vacanta la munte") {
                 new Message {
                     TimeStamp = DateTime.UtcNow.AddMonths (-1),
                     Sender = dummyContacts [0],
@@ -34,7 +34,7 @@ namespace Topichat.Core
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = dummyContacts [1], Text = "ok", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = me, Text = "This is a really long message to test that the preview and message bubbles wrap as expected. Hooray!", Topic = "Default"}
 			},
-            new Conversation("id2") {
+            new Conversation("id2", "Proiect facultate") {
 				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = dummyContacts [1], Text = "Sal!", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = me, Text = "Esti?", Topic = "Default"},
 			}

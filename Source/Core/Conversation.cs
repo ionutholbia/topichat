@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
 using System;
+using System.Linq;
 
 namespace Topichat.Core
 {
@@ -12,20 +13,21 @@ namespace Topichat.Core
     {
 		public event PropertyChangedEventHandler PropertyChanged;
 
-        public Conversation(string id)
+        public Conversation(string id, string topic)
         {
             participants = new List<Contact>();
             Messages = new ObservableCollection<Message>();
             Messages.CollectionChanged += OnMessagesChanged;
             Id = id;
+            Topic = topic;
         }
 
-        public Conversation(IEnumerable<Contact> otherParties) : this(Guid.NewGuid().ToString())
+        public Conversation(IEnumerable<Contact> otherParties, string topic) : this(Guid.NewGuid().ToString(), topic)
         {
             participants.AddRange(otherParties);
         }
 
-        public Conversation(params Contact[] otherParties) : this((IEnumerable<Contact>)otherParties)
+        public Conversation(Contact[] otherParties, string topic) : this((IEnumerable<Contact>)otherParties, topic)
         {
         }
 
@@ -33,10 +35,7 @@ namespace Topichat.Core
 
         public string Topic { get;  set; }
 
-		public IEnumerable<Contact> Participants 
-        {
-			get { return participants; }
-		}
+        public IEnumerable<Contact> Participants => this.participants;
 
 		List<Contact> participants;
 
@@ -60,6 +59,7 @@ namespace Topichat.Core
 		public void Add (Message msg)
 		{
             msg.ConversationId = Id;
+            msg.Topic = Topic;
 			Messages.Add (msg);
 		}
 

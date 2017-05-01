@@ -14,11 +14,16 @@ namespace Topichat.Forms
             ConversationManager = conversationManager;
             ContactManager = contactManager;
 
-            InitializeComponent();
+			InitializeComponent();
 
-            MainPage = new ConversationsPage();
+            MainPage = new TopicsPage();
         }
 
+        public App()
+        {
+            InitializeComponent();
+            MainPage = new TopicsPage();
+        }
 
         protected override void OnStart()
         {
