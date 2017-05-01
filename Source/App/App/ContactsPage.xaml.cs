@@ -1,8 +1,10 @@
 ﻿using Topichat.Core;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Topichat.Forms
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ContactsPage : ContentPage
     {        
         public ContactsPage()

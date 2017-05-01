@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using Topichat.Forms;
+using ImageCircle.Forms.Plugin.iOS;
 
 namespace App.iOS
 {
@@ -14,6 +15,7 @@ namespace App.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            ImageCircleRenderer.Init();
 
             LoadApplication(new Topichat.Forms.App());
 
