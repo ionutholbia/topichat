@@ -7,6 +7,7 @@ namespace Topichat.Forms
         public HomePage()
         {
             InitializeComponent();
+            Navigation.PushModalAsync(new NavigationPage(new ContactsPage()));
         }
     }
 }

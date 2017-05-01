@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Topichat
+namespace Topichat.Core
 {
 
 	public class Contact : INotifyPropertyChanged 
@@ -65,12 +65,11 @@ namespace Topichat
             return FirstName + " " + LastName;
         }
 
-        public string Initials ()
-        {
-            return $"{FirstName[0]}{LastName[0]}";
-        }
+        public string Initials => $"{FirstName[0]}{LastName[0]}";
 
-        public string ImageUrl { get; set; }
+        public string QuickSearchIndex => FirstName[0].ToString();
+
+        public string ImageUrl => "https://image.freepik.com/free-icon/unknown-user-symbol_318-54178.jpg";
 	}
 }
 
