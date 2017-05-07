@@ -10,9 +10,11 @@ namespace Topichat.Forms
         public TopicsPageViewModel()
         {
             Conversations = App.ConversationManager.GetConversations();
+            Participants = Conversations.FirstOrDefault().Participants.FirstOrDefault().FirstName;
         }
 
         public ObservableCollection<Conversation> Conversations { get; }
 
+        public string Participants { get; }
     }
 }

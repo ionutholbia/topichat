@@ -2,9 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 			 x:Class="Topichat.Forms.TopicsPage"
-			 Title="Main Page">
+			 Title="Topics Page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="BackgroundColor" Value="#549EDE" />
+                <Setter Property="WidthRequest" Value="200" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-	<StackLayout>
+    <ContentPage.Content>
+	<StackLayout Padding="0,30,0,0">
+        <Entry Text="{Binding Participants}"/>
+		
 		<ListView ItemsSource="{Binding Conversations}" HasUnevenRows="true" ItemTapped="OnListViewItemTapped" ItemSelected="OnListViewItemSelected">
 		<ListView.ItemTemplate>
 			<DataTemplate>
@@ -19,13 +34,14 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<Label Grid.Column="1" Text="{Binding Topic}" Style="{DynamicResource TitleStyle}" />
+						<Label Grid.Column="1" Text="{Binding Topic}" Style="{DynamicResource SubtitleTextStyle}"/>
 					</Grid>
 				</ViewCell>
 			</DataTemplate>
 		</ListView.ItemTemplate>
 		</ListView>
 	</StackLayout>
+    </ContentPage.Content>
 
 	
 </ContentPage>

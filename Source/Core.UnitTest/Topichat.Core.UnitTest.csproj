@@ -34,7 +34,7 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.7.9\lib\net45\Moq.dll</HintPath>
+      <HintPath>..\packages\Moq.4.7.10\lib\net45\Moq.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

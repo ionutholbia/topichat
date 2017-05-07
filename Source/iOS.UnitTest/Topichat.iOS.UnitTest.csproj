@@ -96,7 +96,7 @@
       <HintPath>..\packages\M2MqttDotnetCore.1.0.5\lib\netstandard1.6\M2Mqtt.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.7.9\lib\netstandard1.3\Moq.dll</HintPath>
+      <HintPath>..\packages\Moq.4.7.10\lib\netstandard1.3\Moq.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
