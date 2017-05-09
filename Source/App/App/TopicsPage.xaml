@@ -17,8 +17,18 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-	<StackLayout Padding="0,30,0,0">
-        <Entry Text="{Binding Participants}"/>
+	<StackLayout Spacing="0" Padding="0" BackgroundColor="#549EDE">
+		<Label Text="Test" 
+			BackgroundColor="#549EDE" 
+			VerticalOptions="Fill"
+			HorizontalTextAlignment="Center"
+			VerticalTextAlignment="Center"
+			TextColor="White"
+			Style="{DynamicResource TitleStyle}"
+			Margin="0, 20, 0, 0"
+			HeightRequest="40"/>
+			
+		<SearchBar x:Name="searchBar" Placeholder="Topic" SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" />
 		
 		<ListView ItemsSource="{Binding Conversations}" HasUnevenRows="true" ItemTapped="OnListViewItemTapped" ItemSelected="OnListViewItemSelected">
 		<ListView.ItemTemplate>
@@ -34,7 +44,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<Label Grid.Column="1" Text="{Binding Topic}" Style="{DynamicResource SubtitleTextStyle}"/>
+						<Label Grid.Column="1" Text="{Binding Topic}" />
 					</Grid>
 				</ViewCell>
 			</DataTemplate>
