@@ -27,3 +27,5 @@ Source/App/App/obj/
 Source/App/Droid/obj/
 
 Source/App/iOS/obj/
+*.bak
+/Source/App/UWP/obj/x86/Debug
