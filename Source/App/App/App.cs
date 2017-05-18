@@ -3,7 +3,7 @@ using Topichat.Core;
 
 namespace Topichat.Forms
 {
-    public partial class App : Application
+    public class App : Application
     {
         internal static IContacts ContactManager { get; private set; }
 
@@ -14,16 +14,29 @@ namespace Topichat.Forms
             ConversationManager = conversationManager;
             ContactManager = contactManager;
 
-			InitializeComponent();
-
-            MainPage = new TopicsPage();
+            InitApp();
         }
 
         public App()
         {
-            InitializeComponent();
-            MainPage = new TopicsPage();
+            InitApp();
         }
+
+        void InitApp()
+        {
+            Resources = new ResourceDictionary
+            {
+                { "primaryBlue", Color.FromHex("509ee2") }
+            };
+
+            var topicsPage = new NavigationPage(new TopicsPage())
+			{
+				BarBackgroundColor = (Color)App.Current.Resources["primaryBlue"],
+				BarTextColor = Color.White
+			};
+
+			MainPage = topicsPage;
+		}
 
         protected override void OnStart()
         {
