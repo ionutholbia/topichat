@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+    xmlns:local="clr-namespace:Topichat.Forms" 
+    x:Class="Topichat.Forms.ConversationsPage" 
+    Icon="conversations.png" 
+    Title="Conversations">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="OnItemAdded">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" Android="plus.png" />
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <StackLayout BackgroundColor="#f1f5f8">
+        
+    <SearchBar x:Name="searchBar" Placeholder="Conversation" SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" />
+    <ListView ItemsSource="{Binding Conversations}" HasUnevenRows="true" ItemTapped="OnListViewItemTapped" ItemSelected="OnListViewItemSelected" BackgroundColor="#f1f5f8">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <controls:CircleImage Grid.RowSpan="2" Source="{Binding ImageUrl}" Aspect="AspectFill">
+                              <controls:CircleImage.WidthRequest>
+                                <OnPlatform x:TypeArguments="x:Double"
+                                  iOS="45"
+                                  Android="45"
+                                  WinPhone="45"/>
+                               </controls:CircleImage.WidthRequest>
+                            <controls:CircleImage.HeightRequest>
+                                <OnPlatform x:TypeArguments="x:Double"
+                                  iOS="45"
+                                  Android="45"
+                                  WinPhone="45"/>
+                               </controls:CircleImage.HeightRequest>
+                            </controls:CircleImage>                         
+                            <Label Grid.Column="1" Text="{Binding ParticipantsNames}" Style="{DynamicResource TitleStyle}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Topic}" VerticalOptions="End" Style="{DynamicResource SubtitleTextStyle}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+    </ListView>
+        
+    </StackLayout>
+</ContentPage>

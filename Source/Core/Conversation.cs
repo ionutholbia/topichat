@@ -41,6 +41,31 @@ namespace Topichat.Core
 
 		public ObservableCollection<Message> Messages { get; private set; }
 
+        public string ImageUrl 
+        {
+            get 
+            {
+                if(this.participants.Count > 1)
+                {
+                    return "https://image.freepik.com/free-icon/group-of-users-silhouette_318-49953.jpg";
+                }
+
+                return this.participants.FirstOrDefault().ImageUrl;
+            }
+        } 
+
+        public string ParticipantsNames
+        {
+			get
+			{
+				if (this.participants.Count > 1)
+				{
+					return this.participants.Select(i => i.FirstName).Aggregate((i, j) => i + "," + j);
+				}
+
+                return this.participants.FirstOrDefault().FullName;
+			}
+		}
 
 		void OnMessagesChanged (object sender, NotifyCollectionChangedEventArgs e)
 		{

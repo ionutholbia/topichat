@@ -67,6 +67,8 @@ namespace Topichat.Core
 
         public string Initials => $"{FirstName[0]}{LastName[0]}";
 
+        public string FullName => $"{FirstName} {LastName}";
+
         public string QuickSearchIndex => FirstName[0].ToString();
 
         public string ImageUrl => "https://image.freepik.com/free-icon/unknown-user-symbol_318-54178.jpg";

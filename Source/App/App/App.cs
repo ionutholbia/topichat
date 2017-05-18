@@ -29,13 +29,13 @@ namespace Topichat.Forms
                 { "primaryBlue", Color.FromHex("509ee2") }
             };
 
-            var topicsPage = new NavigationPage(new TopicsPage())
+            var homePage = new NavigationPage(new HomePage())
 			{
 				BarBackgroundColor = (Color)App.Current.Resources["primaryBlue"],
 				BarTextColor = Color.White
 			};
 
-			MainPage = topicsPage;
+			MainPage = homePage;
 		}
 
         protected override void OnStart()

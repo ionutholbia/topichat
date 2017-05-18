@@ -4,6 +4,7 @@
 			 xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 			 xmlns:local="clr-namespace:Topichat.Forms" 
 			 x:Class="Topichat.Forms.ContactsPage" 
+             Icon="contacts.png"
 			 Title="Contacts">
 	
 	<StackLayout>
