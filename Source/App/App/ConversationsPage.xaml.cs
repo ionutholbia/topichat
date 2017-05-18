@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Topichat.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,10 +24,29 @@ namespace Topichat.Forms
 		async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
 			var conversation = ((ListView)sender).SelectedItem as Conversation;
+            if(conversation == null)
+            {
+                return;
+            }
+
+            var data = new ObservableCollection<Conversation>
+            {
+                conversation
+            };
+
+            var mainPage = this.Parent as TabbedPage;
+			mainPage.Children[1].BindingContext = new TopicsPageViewModel
+			{
+				Conversations = data,
+				Participants = conversation.ParticipantsNames
+			};
+
+            mainPage.CurrentPage = mainPage.Children[1];
 		}
 
 		async void OnItemAdded(object sender, EventArgs e)
 		{
+            await Navigation.PushAsync(new NavigationPage(new ContactsPage()));
 		}
 	}
 }

@@ -8,14 +8,9 @@ namespace Topichat.Forms
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TopicsPage : ContentPage
     {
-        readonly TopicsPageViewModel conversationViewPageModel = new TopicsPageViewModel();
-
         public TopicsPage()
         {
             InitializeComponent();
-            BindingContext = this.conversationViewPageModel;
-
-            //Navigation.PushModalAsync(new NavigationPage(new ContactsPage()));
         }
 
         void OnListViewItemTapped(object sender, ItemTappedEventArgs e)

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
+using System.Linq;
+using Topichat.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +14,6 @@ namespace Topichat.Forms
         public HomePage()
         {
             InitializeComponent();
-        }
+        }          
     }
 }
