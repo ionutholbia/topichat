@@ -1,3 +1,4 @@
+using System;
 using Topichat.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -26,5 +27,9 @@ namespace Topichat.Forms
         {
         	var contact = ((ListView)sender).SelectedItem as Conversation;
         }
-    }
+
+		async void OnItemAdded(object sender, EventArgs e)
+		{
+		}
+	}
 }
