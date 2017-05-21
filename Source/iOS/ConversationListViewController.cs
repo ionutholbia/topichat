@@ -28,7 +28,7 @@ namespace Topichat.Ios
 		protected virtual UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath, object data)
 		{
 			var cell = (ConversationCell)tableView.DequeueReusableCell (ConversationCell.Id, indexPath);
-			cell.Conversation = (Conversation)data;
+			cell.Conversation = (Topic)data;
 			return cell;
 		}
 		

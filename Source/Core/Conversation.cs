@@ -1,102 +1,98 @@
-﻿using System.ComponentModel;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Collections.ObjectModel;
-using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Topichat.Core
 {
-
-	public class Conversation : INotifyPropertyChanged, IEnumerable<Message> 
+    public class Conversation : INotifyPropertyChanged, IEnumerable<Topic>
     {
-		public event PropertyChangedEventHandler PropertyChanged;
+		readonly Contact me;
 
-        public Conversation(string id, string topic)
+        public Conversation()
         {
-            participants = new List<Contact>();
-            Messages = new ObservableCollection<Message>();
-            Messages.CollectionChanged += OnMessagesChanged;
-            Id = id;
-            Topic = topic;
-        }
+			Topics = new ObservableCollection<Topic>();
+		}
 
-        public Conversation(IEnumerable<Contact> otherParties, string topic) : this(Guid.NewGuid().ToString(), topic)
+        public Conversation(IEnumerable<Contact> participants, Contact me) : this()
         {
-            participants.AddRange(otherParties);
-        }
+            this.me = me;
+            Participants = participants;		
+		}
 
-        public Conversation(Contact[] otherParties, string topic) : this((IEnumerable<Contact>)otherParties, topic)
+        public ObservableCollection<Topic> Topics { get; private set; }
+
+        public IEnumerable<Contact> Participants { get; private set; }
+        		
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public IEnumerator<Topic> GetEnumerator()
         {
-        }
+            return Topics.GetEnumerator();
+		}
 
-        public string Id { get; private set; }
+        public Topic StartTopic(string id, string name)
+		{
+            return Topics.SingleOrDefault(top => top.Id == id) ?? NewTopic(id, name);
+		}
 
-        public string Topic { get;  set; }
-
-        public IEnumerable<Contact> Participants => this.participants;
-
-		List<Contact> participants;
-
-		public ObservableCollection<Message> Messages { get; private set; }
-
-        public string ImageUrl 
-        {
-            get 
-            {
-                if(this.participants.Count > 1)
-                {
-                    return "https://image.freepik.com/free-icon/group-of-users-silhouette_318-49953.jpg";
-                }
-
-                return this.participants.FirstOrDefault().ImageUrl;
-            }
-        } 
-
-        public string ParticipantsNames
-        {
+		public string ImageUrl
+		{
 			get
 			{
-				if (this.participants.Count > 1)
+                if (Participants.Count() > 1)
 				{
-					return this.participants.Select(i => i.FirstName).Aggregate((i, j) => i + "," + j);
+					return "https://image.freepik.com/free-icon/group-of-users-silhouette_318-49953.jpg";
 				}
 
-                return this.participants.FirstOrDefault().FullName;
+				return Participants.FirstOrDefault().ImageUrl;
 			}
 		}
 
-		void OnMessagesChanged (object sender, NotifyCollectionChangedEventArgs e)
+        public string LastTopic => Topics.FirstOrDefault().Name;
+
+		public string ParticipantsNames
 		{
-			var participantsChanged = false;
-			foreach (Message msg in e.NewItems) {
-				if (!participants.Contains (msg.Sender)) {
-					participants.Add (msg.Sender);
-					participantsChanged = true;
+			get
+			{
+				if (Participants.Count() > 1)
+				{
+                    return Participants.Select(i => i.FirstName).Aggregate((i, j) => i + "," + j);
 				}
+
+				return Participants.FirstOrDefault().FullName;
 			}
-			if (participantsChanged)
-				PropertyChanged?.Invoke (this, new PropertyChangedEventArgs (nameof (Participants)));
 		}
 
 		// The following members make it so we can initialize a Conversation with the collection initializer
-		public void Add (Message msg)
+		public void Add(Topic topic)
 		{
-            msg.ConversationId = Id;
-            msg.Topic = Topic;
-			Messages.Add (msg);
+			topic.PropertyChanged += TopicParticipantsChanged;
+			Topics.Add(topic);
 		}
 
-		public IEnumerator<Message> GetEnumerator ()
+        void TopicParticipantsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(sender, e);
+        }
+        		
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+        		
+        Topic NewTopic(string id, string name)
 		{
-			return Messages.GetEnumerator ();
-		}
+            var topic = new Topic(Participants, id, name);
+            topic.PropertyChanged += TopicParticipantsChanged;
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return GetEnumerator ();
+            this.Topics.Add(topic);
+
+			return topic;
 		}
 	}
 }
-

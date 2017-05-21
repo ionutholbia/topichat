@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,8 +12,8 @@ namespace Topichat.Core
         ObservableCollection<Conversation> conversations;
 
         readonly IStorageData storageData;
-        readonly Contact me;
         readonly IBrokerConnection brokerConnection;
+        readonly Contact me;
 
         public ConversationManager(IBrokerConnection brokerManager, IStorageData storageData, Contact me)
         {
@@ -31,32 +32,63 @@ namespace Topichat.Core
                 this.storageData.GetConversations(conversations);
             }
 
+            foreach(var conv in conversations)
+            {
+                conv.PropertyChanged += ReorderConversations;
+            }
+
             return conversations;
         }
 
-        public async Task<Conversation> StartConversation(List<Contact> contacts, string topic)
+        void ReorderConversations(object sender, PropertyChangedEventArgs e)
+        {
+            var topic = sender as Topic;
+            var conversation = this.conversations.SingleOrDefault(conv => conv.Topics.SingleOrDefault(arg => arg.Id == topic.Id) != null);
+            conversation.Topics.Remove(topic);
+
+			conversation = conversations.FirstOrDefault(
+                c => c.Participants.Where(p => p != this.me).SequenceEqual(topic.Participants));
+
+            if(conversation == null)
+            {
+                conversation = NewConversation(topic.Participants as List<Contact>);
+            }
+            conversation.Add(topic);
+		}
+
+        public async Task<Topic> StartConversation(List<Contact> contacts, string topic)
         {
             var conversation = conversations.FirstOrDefault(
-                c => c.Participants.Where(p => p != this.me).SequenceEqual(contacts) && c.Topic == topic);
-            return conversation ?? NewConversation(contacts, topic);
+                c => c.Participants.Where(p => p != this.me).SequenceEqual(contacts));
+
+            return conversation.StartTopic(Guid.NewGuid().ToString(), topic) ?? 
+                               NewConversation(contacts).StartTopic(Guid.NewGuid().ToString(), topic);
+        }
+
+        Conversation NewConversation(List<Contact> contacts)
+        {
+            var conversation = new Conversation(contacts, me);
+			conversation.PropertyChanged += ReorderConversations;
+			
+            this.conversations.Add(conversation);
+
+            return conversation;
         }
 
         void BrokerConnectionMessageReceived(Message message)
         {
-            var conversation = conversations.FirstOrDefault(c => c.Id == message.ConversationId);
-            if (conversation == null)
+            var topic = this.conversations.SelectMany(conv => conv.Topics)
+                            .FirstOrDefault(top => top.Id == message.TopicId);
+            if (topic == null)
             {
-                conversation = NewConversation(message.Receivers, message.Topic);
+                message.Receivers.Add(message.Sender);
+                var conversation = NewConversation(message.Receivers);
+                this.conversations.Add(conversation);
+
+                topic = conversation.StartTopic(message.TopicId, message.Topic);
             }
 
-            conversation.Add(message);
-        }
-
-        Conversation NewConversation(List<Contact> contacts, string topic)
-        {
-            var conversation = new Conversation(contacts, topic);
-            conversations.Add(conversation);
-            return conversation;
+            topic.Add(message);
         }
     }
 }

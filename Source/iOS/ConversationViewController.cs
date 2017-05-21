@@ -15,7 +15,7 @@ namespace Topichat.Ios
 
 		static readonly NSString contactCellId = new NSString ("ContactCell");
 
-		public Conversation Conversation {
+		public Topic Conversation {
 			get { return conversation; }
 			set {
 				if (conversation != value) {
@@ -30,7 +30,7 @@ namespace Topichat.Ios
 
 		IDisposable titleBinding;
 		NSObject keyboardObserver;
-		Conversation conversation;
+		Topic conversation;
 
 		public ConversationViewController (IntPtr handle) : base (handle)
 		{

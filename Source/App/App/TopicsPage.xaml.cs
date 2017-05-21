@@ -20,7 +20,7 @@ namespace Topichat.Forms
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-        	var contact = ((ListView)sender).SelectedItem as Conversation;
+        	var contact = ((ListView)sender).SelectedItem as Topic;
         }
 
 		async void OnItemAdded(object sender, EventArgs e)

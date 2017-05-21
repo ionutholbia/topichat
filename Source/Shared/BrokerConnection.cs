@@ -45,7 +45,7 @@ namespace Topichat.Shared
             foreach (var receiver in message.Receivers)
             {
                 await Task.Run(() => this.mqttClient.Publish(
-                    $"{MqttTopicPrefix}/{receiver.PhoneNumber}/{message.ConversationId}/{message.Topic}/{receiversStrings}/{this.clientId}",
+                    $"{MqttTopicPrefix}/{receiver.PhoneNumber}/{message.TopicId}/{message.Topic}/{receiversStrings}/{this.clientId}",
                     Encoding.UTF8.GetBytes(message.Text),
                     MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
                     false));
@@ -114,7 +114,7 @@ namespace Topichat.Shared
             return new Message
             {
                 Text = text,
-                ConversationId = topicLevels[2],
+                TopicId = topicLevels[2],
                 Topic = topicLevels[3],
                 Receivers = receivers,
                 Sender = new Contact { PhoneNumber = topicLevels[5] }

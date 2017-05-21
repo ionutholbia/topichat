@@ -15,9 +15,7 @@ namespace Topichat.Forms
             SearchCommand = new Command<string>(async(text) => await SearchInContactList(text));
         }
 
-        public ObservableCollection<Conversation> Conversations { get; set; }
-
-        public string Participants { get; set; }
+        public ObservableCollection<Topic> Topics { get; set; }
 
         public ICommand SearchCommand { get; private set; }
 

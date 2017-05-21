@@ -46,7 +46,7 @@
                                </controls:CircleImage.HeightRequest>
                             </controls:CircleImage>                         
                             <Label Grid.Column="1" Text="{Binding ParticipantsNames}" Style="{DynamicResource TitleStyle}" />
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Topic}" VerticalOptions="End" Style="{DynamicResource SubtitleTextStyle}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding LastTopic}" VerticalOptions="End" Style="{DynamicResource SubtitleTextStyle}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

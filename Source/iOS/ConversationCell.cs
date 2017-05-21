@@ -15,7 +15,7 @@ namespace Topichat.Ios
 
 		IDisposable participantSubscription, messageSubscription, timeStampSubscription;
 
-		public Conversation Conversation {
+		public Topic Conversation {
 			get { return conversation; }
 			set {
 				if (conversation != value) {
@@ -49,7 +49,7 @@ namespace Topichat.Ios
 				}
 			}
 		}
-		Conversation conversation;
+		Topic conversation;
 
         public ConversationCell (IntPtr handle) : base (handle)
         {

@@ -13,12 +13,9 @@ namespace Topichat.Forms
         {
 			Conversations = App.ConversationManager.GetConversations();
 			SearchCommand = new Command<string>(async (text) => await SearchInContactList(text));
-			Participants = Conversations.FirstOrDefault().Participants.FirstOrDefault().FirstName;
 		}
 
-		public ObservableCollection<Conversation> Conversations { get; }
-
-		public string Participants { get; }
+        public ObservableCollection<Conversation> Conversations { get; }
 
 		public ICommand SearchCommand { get; private set; }
 

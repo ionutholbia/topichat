@@ -21,8 +21,13 @@ namespace Topichat.Core
             PhoneNumber = "111"
         };
         		
-        static readonly Conversation [] dummyConversations = new[] {
-            new Conversation("id1", "Vacanta la munte") {
+        static readonly Topic [] dummyConversations = new[] {
+            new Topic(new Contact [] 
+            {
+				new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
+				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
+			}, "id1", "Vacanta la munte") 
+            {
                 new Message {
                     TimeStamp = DateTime.UtcNow.AddMonths (-1),
                     Sender = dummyContacts [0],
@@ -34,7 +39,11 @@ namespace Topichat.Core
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = dummyContacts [1], Text = "ok", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = me, Text = "This is a really long message to test that the preview and message bubbles wrap as expected. Hooray!", Topic = "Default"}
 			},
-            new Conversation("id2", "Proiect facultate") {
+			new Topic(new Contact []
+			{
+				new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
+				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
+			},"id2", "Proiect facultate") {
 				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = dummyContacts [1], Text = "Sal!", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = me, Text = "Esti?", Topic = "Default"},
 			}
@@ -42,9 +51,22 @@ namespace Topichat.Core
 
         public async Task GetConversations (ObservableCollection<Conversation> conversations)
 		{
-			foreach (var convo in dummyConversations) {
-				conversations.Add (convo);
-			}
+            conversations.Add(new Conversation(new Contact[]
+            {
+                new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
+                new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
+            }, me)
+            {
+                dummyConversations[0]
+            });
+
+            conversations.Add(new Conversation(new Contact[]
+			{
+				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
+			}, me)
+			{
+				dummyConversations[1]
+			});
 		}
     }
 }
