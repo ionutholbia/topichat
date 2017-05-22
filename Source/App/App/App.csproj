@@ -38,6 +38,15 @@
     <EmbeddedResource Include="ConversationsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChatIncomingViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChatOutgoingViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChatPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TopicsPage.xaml.cs">
@@ -57,7 +66,18 @@
       <DependentUpon>ConversationsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConversationsPageViewModel.cs" />
-  </ItemGroup>
+    <Compile Include="ChatIncomingViewCell.xaml.cs">
+      <DependentUpon>ChatIncomingViewCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChatOutgoingViewCell.xaml.cs">
+      <DependentUpon>ChatOutgoingViewCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChatPageViewModel.cs" />
+    <Compile Include="ChatPageTemplateSelector.cs" />
+ </ItemGroup>
   <ItemGroup>
     <Reference Include="ImageCircle.Forms.Plugin.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\portable-net45+wp80+win8+wpa81\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>

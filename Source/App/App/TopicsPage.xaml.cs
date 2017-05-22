@@ -20,8 +20,23 @@ namespace Topichat.Forms
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-        	var contact = ((ListView)sender).SelectedItem as Topic;
-        }
+        	var topic = ((ListView)sender).SelectedItem as Topic;
+            if(topic == null)
+            {
+                return;
+            }
+
+            var chatPage = new ChatPage
+            {
+                BindingContext = new ChatPageViewModel
+                {
+                    Messages = topic.Messages
+                }
+            };
+
+            chatPage.Initialize();
+            await Navigation.PushAsync(new NavigationPage(chatPage));
+		}
 
 		async void OnItemAdded(object sender, EventArgs e)
 		{
