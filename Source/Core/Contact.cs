@@ -71,7 +71,7 @@ namespace Topichat.Core
 
         public string QuickSearchIndex => FirstName[0].ToString();
 
-        public string ImageUrl => "https://image.freepik.com/free-icon/unknown-user-symbol_318-54178.jpg";
+        public string ImageUrl => "unknowncontact.png";
 	}
 }
 

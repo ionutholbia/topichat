@@ -20,16 +20,16 @@
                       HeightRequest="35"
                       WidthRequest="35"
                       BorderThickness="2"
-                      BorderColor="#03A9F4"
+                      BorderColor="#509EE2"
                       Aspect="AspectFill"
                       HorizontalOptions="Center"
-                      VerticalOptions="Center" Source="Binding Sender.ImageUrl" ></plugin:CircleImage>
+                      VerticalOptions="Center" Source="Binding SenderImageUrl" ></plugin:CircleImage>
     <Frame Grid.Row="0"  Grid.Column="1">
 		<Frame.HasShadow>
             <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
         </Frame.HasShadow>
 		<Frame.BackgroundColor>
-            <OnPlatform x:TypeArguments="Color" iOS="#F5F5F5" Android="White"/>
+            <OnPlatform x:TypeArguments="Color" iOS="#F1f5F8" Android="White"/>
 		</Frame.BackgroundColor>
 			<StackLayout>
                 <Label TextColor="Black"  Text="{Binding Text}" />

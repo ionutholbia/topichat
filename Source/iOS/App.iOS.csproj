@@ -148,6 +148,17 @@
   <ItemGroup>
     <BundleResource Include="Resources\contacts.png" />
     <BundleResource Include="Resources\conversations.png" />
+    <BundleResource Include="Resources\addcontact.png" />
+    <BundleResource Include="Resources\addcontact%402x.png" />
+    <BundleResource Include="Resources\conversations%402x.png" />
+    <BundleResource Include="Resources\send.png" />
+    <BundleResource Include="Resources\send%402x.png" />
+    <BundleResource Include="Resources\speech.png" />
+    <BundleResource Include="Resources\speech%402x.png" />
+    <BundleResource Include="Resources\write.png" />
+    <BundleResource Include="Resources\write%402x.png" />
+    <BundleResource Include="Resources\contacts%402x.png" />
+    <BundleResource Include="Resources\unknowncontact.png" />
   </ItemGroup>
   <Import Project="..\Shared\Topichat.Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Topichat.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -8,11 +8,7 @@
     Title="Conversations">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Clicked="OnItemAdded">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource" Android="plus.png" />
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+        <ToolbarItem Clicked="OnItemAdded" Icon="addcontact.png"/>
     </ContentPage.ToolbarItems>
     <StackLayout BackgroundColor="#f1f5f8">
         

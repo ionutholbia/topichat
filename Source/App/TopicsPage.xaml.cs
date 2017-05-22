@@ -31,7 +31,8 @@ namespace Topichat.Forms
                 BindingContext = new ChatPageViewModel
                 {
                     Messages = topic.Messages
-                }
+                },
+                Title = topic.Name
             };
 
             chatPage.Initialize();

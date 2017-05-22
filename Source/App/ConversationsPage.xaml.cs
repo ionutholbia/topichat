@@ -36,6 +36,7 @@ namespace Topichat.Forms
 			};
 
             mainPage.CurrentPage = mainPage.Children[1];
+            mainPage.Title = conversation.ParticipantsNames;
 		}
 
 		async void OnItemAdded(object sender, EventArgs e)

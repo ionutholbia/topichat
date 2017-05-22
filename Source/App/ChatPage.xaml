@@ -26,14 +26,14 @@
 			SeparatorVisibility="None" />
 		
 		<!-- Entry and Send button in Row 1 -->
-		<StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
+		<StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#D5DFE6">
 			<Entry 
 			    HorizontalOptions="FillAndExpand" 
 				HeightRequest="25" 
-				Placeholder="Message" 
+				Placeholder="Write here..." 
 				Text="{Binding OutGoingText}"/>
 			<Button 
-				Text="Send" 
+                Image="send.png"
 				Command="{Binding SendCommand}"/>
 		</StackLayout>
 	</Grid>
