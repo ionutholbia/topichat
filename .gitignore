@@ -21,4 +21,4 @@ Source/Droid/obj/
 Source/iOS/obj/
 *.bak
 
-/Source/App/UWP/obj
+/Source/UWP/obj

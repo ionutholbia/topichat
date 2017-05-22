@@ -24593,8 +24593,8 @@
     },
     "Topichat.Core/1.0.0": {
       "type": "project",
-      "path": "../../Core/project.json",
-      "msbuildProject": "../../Core/Topichat.Core.csproj"
+      "path": "../Core/project.json",
+      "msbuildProject": "../Core/Topichat.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -24610,10 +24610,10 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "D:\\Projects\\topichat\\Source\\App\\UWP\\App.UWP.csproj",
+      "projectUniqueName": "D:\\Projects\\topichat\\Source\\UWP\\App.UWP.csproj",
       "projectName": "App.UWP",
-      "projectPath": "D:\\Projects\\topichat\\Source\\App\\UWP\\App.UWP.csproj",
-      "projectJsonPath": "D:\\Projects\\topichat\\Source\\App\\UWP\\project.json",
+      "projectPath": "D:\\Projects\\topichat\\Source\\UWP\\App.UWP.csproj",
+      "projectJsonPath": "D:\\Projects\\topichat\\Source\\UWP\\project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "uap10.0": {
@@ -24621,8 +24621,8 @@
             "D:\\Projects\\topichat\\Source\\Core\\Topichat.Core.csproj": {
               "projectPath": "D:\\Projects\\topichat\\Source\\Core\\Topichat.Core.csproj"
             },
-            "D:\\Projects\\topichat\\Source\\App\\App\\App.csproj": {
-              "projectPath": "D:\\Projects\\topichat\\Source\\App\\App\\App.csproj"
+            "D:\\Projects\\topichat\\Source\\App\\App.csproj": {
+              "projectPath": "D:\\Projects\\topichat\\Source\\App\\App.csproj"
             }
           }
         }
