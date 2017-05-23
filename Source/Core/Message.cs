@@ -16,7 +16,5 @@ namespace Topichat.Core
         public string Text { get; set; }
 
         public string TopicId { get; set; }
-
-		public string SenderImageUrl => "unknowncontact.png";
     }
 }

@@ -10,27 +10,57 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Globalization;
 using Topichat.Core;
+using MvvmHelpers;
 
 namespace Topichat.Forms
 {
-    public class ChatPageViewModel
+    public class ChatPageViewModel : BaseViewModel
     {
         public ObservableCollection<Message> Messages { get; set; }
 
-        public string OutGoingText { get; set; }
+		public List<Contact> Participants { get; set; }
 
-        public ICommand SendCommand { get; set; }
+        public string TopicName { get; set; }
+
+        public string TopicId { get; set; }
+
+		string outgoingText = string.Empty;
+		public string OutGoingText
+		{
+			get { return outgoingText; }
+			set { SetProperty(ref outgoingText, value); }
+		}
+
+		public ICommand SendCommand { get; set; }
 
         public ICommand LocationCommand { get; set; }
 
         public ChatPageViewModel()
         {
-            SendCommand = new Command<string>(async (text) => await SendMessage(text));
+            SendCommand = new Command(async () => await SendMessage(OutGoingText));
         }
 
-		private async Task SendMessage(string text)
+		async Task SendMessage(string text)
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+
+            var message = new Message
+            {
+                Text = text,
+                Sender = App.ContactManager.Me,
+                Receivers = Participants,
+                TimeStamp = DateTime.Now,
+                Topic = TopicName,
+                TopicId = TopicId
+            };
+
+            await App.ConversationManager.SendMessage(message);
+
+            Messages.Add(message);
+            OutGoingText = string.Empty;
         }            
 	}
     

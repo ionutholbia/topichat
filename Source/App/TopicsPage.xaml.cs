@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Topichat.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -30,7 +31,10 @@ namespace Topichat.Forms
             {
                 BindingContext = new ChatPageViewModel
                 {
-                    Messages = topic.Messages
+                    Messages = topic.Messages,
+                    Participants = topic.Participants as List<Contact>,
+                    TopicId = topic.Id,
+                    TopicName = topic.Name
                 },
                 Title = topic.Name,
                 BackgroundColor = (Color)Application.Current.Resources["primaryBlue"]

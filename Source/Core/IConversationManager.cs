@@ -9,7 +9,9 @@ namespace Topichat.Core {
     {
         ObservableCollection<Conversation> GetConversations ();
 
-		Task<Topic> StartConversation (List<Contact> contacts, string topic); 
+		Task<Topic> StartConversation (List<Contact> contacts, string topic);
+
+        Task SendMessage(Message message);
 	}
 }
 

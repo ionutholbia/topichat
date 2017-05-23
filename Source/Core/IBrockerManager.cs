@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Topichat.Core
 {
@@ -6,5 +7,6 @@ namespace Topichat.Core
     {
         Action<Message> MessageReceived { get; set;}
 
-    }
+        Task SendMessage(Message message);
+	}
 }

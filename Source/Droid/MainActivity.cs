@@ -29,10 +29,9 @@ namespace App.Droid
            LoadApplication(new Topichat.Forms.App(
                 new ContactManager(),
                 new ConversationManager(
-
-					new BrokerConnection("00400744360800"),
-                    new StorageData(),
-                    new Contact { FirstName = "Ionut", LastName = "Holbia", PhoneNumber = "00400744360800" })));
-        }
+					new BrokerConnection(StorageData.Me.PhoneNumber),
+					new StorageData(),
+					StorageData.Me)));
+		}
     }
 }

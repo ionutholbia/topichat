@@ -14,7 +14,7 @@ namespace Topichat.Core
 			new Contact { FirstName = "Adrian", LastName = "Maxim", PhoneNumber = "0040744444444" },
 		};
 
-        static readonly Contact me = new Contact
+        public static readonly Contact Me = new Contact
         {
             FirstName = "Me",
             LastName = "User",
@@ -32,12 +32,12 @@ namespace Topichat.Core
                     TimeStamp = DateTime.UtcNow.AddMonths (-1),
                     Sender = dummyContacts [0],
                     Text = "Hey!", Topic = "Default"},
-                new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = me, Text = "Salut ce faci?", Topic = "Default"},
-				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = me, Text = "Salut!", Topic = "Default"},
+                new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = Me, Text = "Salut ce faci?", Topic = "Default"},
+				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = Me, Text = "Salut!", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = dummyContacts [0], Text = "Hey", Topic = "Default"},
-				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = me, Text = "nimic interesant...", Topic = "Default"},
+				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = Me, Text = "nimic interesant...", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = dummyContacts [1], Text = "ok", Topic = "Default"},
-				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = me, Text = "This is a really long message to test that the preview and message bubbles wrap as expected. Hooray!", Topic = "Default"}
+				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = Me, Text = "This is a really long message to test that the preview and message bubbles wrap as expected. Hooray!", Topic = "Default"}
 			},
 			new Topic(new Contact []
 			{
@@ -45,7 +45,7 @@ namespace Topichat.Core
 				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
 			},"id2", "Proiect facultate") {
 				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = dummyContacts [1], Text = "Sal!", Topic = "Default"},
-				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = me, Text = "Esti?", Topic = "Default"},
+				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = Me, Text = "Esti?", Topic = "Default"},
 			}
 		};
 
@@ -55,7 +55,7 @@ namespace Topichat.Core
             {
                 new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
                 new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
-            }, me)
+            }, Me)
             {
                 dummyConversations[0]
             });
@@ -63,7 +63,7 @@ namespace Topichat.Core
             conversations.Add(new Conversation(new Contact[]
 			{
 				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
-			}, me)
+			}, Me)
 			{
 				dummyConversations[1]
 			});

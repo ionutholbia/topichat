@@ -40,6 +40,11 @@ namespace Topichat.Core
             return conversations;
         }
 
+        public async Task SendMessage(Message message)
+        {
+            await this.brokerConnection.SendMessage(message);
+        }
+
         void ReorderConversations(object sender, PropertyChangedEventArgs e)
         {
             var topic = sender as Topic;

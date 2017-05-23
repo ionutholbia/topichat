@@ -14,7 +14,7 @@ namespace App.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             global::Xamarin.Forms.Forms.Init();
             ImageCircleRenderer.Init();
@@ -22,11 +22,11 @@ namespace App.iOS
             LoadApplication(new Topichat.Forms.App(
                 new ContactManager(),
                 new ConversationManager(
-                    new BrokerConnection("00400744360800"),
+                    new BrokerConnection(StorageData.Me.PhoneNumber),
                     new StorageData(),
-                    new Contact { FirstName = "Ionut", LastName = "Holbia", PhoneNumber = "00400744360800" })));
+                    StorageData.Me)));
 
-            return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }
 }
