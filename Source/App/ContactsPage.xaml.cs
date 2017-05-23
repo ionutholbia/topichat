@@ -1,4 +1,6 @@
-﻿using Topichat.Core;
+﻿using System;
+using System.Threading.Tasks;
+using Topichat.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,5 +24,10 @@ namespace Topichat.Forms
         {
             var contact = ((ListView)sender).SelectedItem as Contact;
         }
-    }
+
+		async Task OnItemCancel(object sender, EventArgs e)
+		{
+            await Navigation.PopModalAsync(true);
+		}
+	}
 }

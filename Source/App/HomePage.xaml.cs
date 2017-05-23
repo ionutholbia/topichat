@@ -9,11 +9,11 @@ using Xamarin.Forms.Xaml;
 namespace Topichat.Forms
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : TabbedPage
+	public partial class HomePage : MasterDetailPage
     {
         public HomePage()
         {
             InitializeComponent();
-        }          
+		}          
     }
 }

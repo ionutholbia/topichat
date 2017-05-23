@@ -18,11 +18,11 @@
                 Grid.Column="0"
                 HeightRequest="35"
                 WidthRequest="35"
-                BorderThickness="2"
+                BorderThickness="1"
                 BorderColor="#509EE2"
                 Aspect="AspectFill"
                 HorizontalOptions="Center"
-                VerticalOptions="Center" Source="Binding SenderImageUrl"/>
+                VerticalOptions="Center" Source="unknowncontact.png"/>
         <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#509EE2">
 			<Frame.HasShadow>
                 <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>

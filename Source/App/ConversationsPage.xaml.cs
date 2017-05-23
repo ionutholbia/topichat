@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Topichat.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,16 +13,27 @@ namespace Topichat.Forms
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ConversationsPage : ContentPage
     {
+        readonly ConversationsPageViewModel conversationsPageViewModel;
+
         public ConversationsPage()
         {
             InitializeComponent();
-            BindingContext = new ConversationsPageViewModel();
+            conversationsPageViewModel = new ConversationsPageViewModel(Navigation);
+            BindingContext = conversationsPageViewModel;
 		}
 
 		void OnListViewItemTapped(object sender, ItemTappedEventArgs e)
 		{
 			((ListView)sender).SelectedItem = null;
 		}
+
+		protected override async void OnAppearing()
+        {
+            if(this.conversationsListView.SelectedItem == null)
+            {
+                this.conversationsListView.SelectedItem = this.conversationsPageViewModel.Conversations.FirstOrDefault();
+            }
+        }
 
 		async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
@@ -29,19 +43,27 @@ namespace Topichat.Forms
                 return;
             }
 
-            var mainPage = this.Parent as TabbedPage;
-			mainPage.Children[1].BindingContext = new TopicsPageViewModel
+			var mainPage = this.Parent as MasterDetailPage;
+            mainPage.Detail = new NavigationPage(new TopicsPage
 			{
-                Topics = conversation.Topics
+                BindingContext = new TopicsPageViewModel
+                {
+                    Topics = conversation.Topics
+                },
+                Title = conversation.ParticipantsNames,
+            })
+            {
+				BarBackgroundColor = (Color)Application.Current.Resources["primaryBlue"],
+				BarTextColor = Color.White
 			};
 
-            mainPage.CurrentPage = mainPage.Children[1];
-            mainPage.Title = conversation.ParticipantsNames;
+            mainPage.IsPresented = false;
 		}
 
-		async void OnItemAdded(object sender, EventArgs e)
+		public void OnDelete(object sender, EventArgs e)
 		{
-            await Navigation.PushAsync(new NavigationPage(new ContactsPage()));
+			var mi = ((MenuItem)sender);
+			DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
 		}
 	}
 }

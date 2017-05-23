@@ -15,13 +15,13 @@ namespace Topichat.Forms
 
         void OnListViewItemTapped(object sender, ItemTappedEventArgs e)
         {
-        	((ListView)sender).SelectedItem = null;
+            ((ListView)sender).SelectedItem = null;
         }
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-        	var topic = ((ListView)sender).SelectedItem as Topic;
-            if(topic == null)
+            var topic = ((ListView)sender).SelectedItem as Topic;
+            if (topic == null)
             {
                 return;
             }
@@ -32,15 +32,16 @@ namespace Topichat.Forms
                 {
                     Messages = topic.Messages
                 },
-                Title = topic.Name
+                Title = topic.Name,
+                BackgroundColor = (Color)Application.Current.Resources["primaryBlue"]
             };
 
             chatPage.Initialize();
-            await Navigation.PushAsync(new NavigationPage(chatPage));
-		}
+            await Navigation.PushAsync(chatPage);
+        }
 
-		async void OnItemAdded(object sender, EventArgs e)
-		{
-		}
-	}
+        async void OnItemAdded(object sender, EventArgs e)
+        {
+        }
+    }
 }

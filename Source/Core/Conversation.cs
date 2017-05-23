@@ -46,7 +46,7 @@ namespace Topichat.Core
 			{
                 if (Participants.Count() > 1)
 				{
-					return "unknowncontact.png";
+					return "https://image.freepik.com/free-icon/group-of-users-silhouette_318-49953.jpg";
 				}
 
 				return Participants.FirstOrDefault().ImageUrl;
