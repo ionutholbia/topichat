@@ -1,4 +1,5 @@
 ﻿﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,9 @@ namespace Topichat.Forms
 
         public ObservableCollection<Topic> Topics { get; set; }
 
-        public ICommand SearchCommand { get; private set; }
+		public List<Contact> Participants { get; set; }
+
+		public ICommand SearchCommand { get; private set; }
 
         async Task SearchInContactList(string text)
         {

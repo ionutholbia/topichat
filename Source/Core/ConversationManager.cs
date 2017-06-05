@@ -45,6 +45,14 @@ namespace Topichat.Core
             await this.brokerConnection.SendMessage(message);
         }
 
+        public async Task<Conversation> StartConversation(List<Contact> contacts)
+		{
+			var conversation = conversations.FirstOrDefault(
+				c => c.Participants.Where(p => p != this.me).SequenceEqual(contacts));
+
+			return conversation ?? NewConversation(contacts);
+		}
+		
         void ReorderConversations(object sender, PropertyChangedEventArgs e)
         {
             var topic = sender as Topic;
@@ -60,15 +68,6 @@ namespace Topichat.Core
             }
             conversation.Add(topic);
 		}
-
-        public async Task<Topic> StartConversation(List<Contact> contacts, string topic)
-        {
-            var conversation = conversations.FirstOrDefault(
-                c => c.Participants.Where(p => p != this.me).SequenceEqual(contacts));
-
-            return conversation.StartTopic(Guid.NewGuid().ToString(), topic) ?? 
-                               NewConversation(contacts).StartTopic(Guid.NewGuid().ToString(), topic);
-        }
 
         Conversation NewConversation(List<Contact> contacts)
         {

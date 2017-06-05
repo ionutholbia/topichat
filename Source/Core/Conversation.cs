@@ -84,10 +84,29 @@ namespace Topichat.Core
         {
             return GetEnumerator();
         }
+
+        string GenerateUniqTopicName(string desiredName)
+        {
+            int index = 0;
+            var finalName = desiredName;
+
+            do
+            {
+                var topic = Topics.FirstOrDefault(top => top.Name == finalName);
+                if(topic == null)
+                {
+                    return finalName;
+                }
+
+                index++;
+                finalName = desiredName + $" {index}";
+            }
+            while (true);
+        }
         		
         Topic NewTopic(string id, string name)
 		{
-            var topic = new Topic(Participants, id, name);
+            var topic = new Topic(Participants, id, GenerateUniqTopicName(name));
             topic.PropertyChanged += TopicParticipantsChanged;
 
             this.Topics.Add(topic);

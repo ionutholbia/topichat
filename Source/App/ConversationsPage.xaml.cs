@@ -44,12 +44,14 @@ namespace Topichat.Forms
             }
 
 			var mainPage = this.Parent as MasterDetailPage;
+
             mainPage.Detail = new NavigationPage(new TopicsPage
 			{
-                BindingContext = new TopicsPageViewModel
-                {
-                    Topics = conversation.Topics
-                },
+				BindingContext = new TopicsPageViewModel
+				{
+					Topics = conversation.Topics,
+					Participants = conversation.Participants.ToList()
+				},
                 Title = conversation.ParticipantsNames,
             })
             {

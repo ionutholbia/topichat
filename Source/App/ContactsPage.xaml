@@ -8,7 +8,7 @@
 			 Title="Contacts">
 	
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnItemCancel" Text="Cancel"/>
+        <ToolbarItem x:Name="finishToolbarItem" Clicked="OnItemFinish" Text="Cancel"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout>
@@ -41,8 +41,11 @@
                                   Android="45"
                                   WinPhone="45"/>
                                </controls:CircleImage.HeightRequest>
-                            </controls:CircleImage>                         
-							<Label Grid.Column="1" Text="{Binding FirstName}" Style="{DynamicResource TitleStyle}" />
+                            </controls:CircleImage>
+                            <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                <Label Text="{Binding FirstName}" Style="{DynamicResource TitleStyle}" />
+                                <Image Source="speech.png" HorizontalOptions="EndAndExpand" IsVisible="{Binding Selected}"/>
+                            </StackLayout>
 							<Label Grid.Row="1" Grid.Column="1" Text="{Binding LastName}" VerticalOptions="End" Style="{DynamicResource SubtitleTextStyle}" />
 						</Grid>
 					</ViewCell>

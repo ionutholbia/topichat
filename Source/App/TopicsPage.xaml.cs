@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Topichat.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,6 +21,25 @@ namespace Topichat.Forms
             ((ListView)sender).SelectedItem = null;
         }
 
+        async Task StartChat(Topic topic)
+        {
+			var chatPage = new ChatPage
+			{
+				BindingContext = new ChatPageViewModel
+				{
+					Messages = topic.Messages,
+                    Participants = topic.Participants.ToList(),
+					TopicId = topic.Id,
+					TopicName = topic.Name
+				},
+				Title = topic.Name,
+				BackgroundColor = (Color)Application.Current.Resources["primaryBlue"]
+			};
+
+			chatPage.Initialize();
+			await Navigation.PushAsync(chatPage);
+		}
+
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var topic = ((ListView)sender).SelectedItem as Topic;
@@ -27,25 +48,15 @@ namespace Topichat.Forms
                 return;
             }
 
-            var chatPage = new ChatPage
-            {
-                BindingContext = new ChatPageViewModel
-                {
-                    Messages = topic.Messages,
-                    Participants = topic.Participants as List<Contact>,
-                    TopicId = topic.Id,
-                    TopicName = topic.Name
-                },
-                Title = topic.Name,
-                BackgroundColor = (Color)Application.Current.Resources["primaryBlue"]
-            };
-
-            chatPage.Initialize();
-            await Navigation.PushAsync(chatPage);
+            await StartChat(topic);
         }
 
         async void OnItemAdded(object sender, EventArgs e)
         {
-        }
+            var bindingContex = BindingContext as TopicsPageViewModel;
+
+            var conversation = await App.ConversationManager.StartConversation(bindingContex.Participants);
+            await StartChat(conversation.StartTopic(Guid.NewGuid().ToString(), "New Topic"));
+		}
     }
 }
