@@ -14,7 +14,7 @@ namespace Topichat.Forms
         public ConversationsPageViewModel(INavigation navigation)
         {
             this.navigation = navigation;
-			Conversations = App.ConversationManager.GetConversations();
+			Conversations = App.ConversationManager?.GetConversations();
 			SearchCommand = new Command<string>(async (text) => await SearchInContactList(text));
 			AddContactCommand = new Command(async () => await OnContactAdded());
 		}

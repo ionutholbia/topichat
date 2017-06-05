@@ -24,16 +24,13 @@
                       Aspect="AspectFill"
                       HorizontalOptions="Center"
                       VerticalOptions="Center" Source="unknowncontact.png" ></plugin:CircleImage>
-    <Frame Grid.Row="0"  Grid.Column="1">
+    <Frame Grid.Row="0"  Grid.Column="1" BackgroundColor="#F1f5F8">
 		<Frame.HasShadow>
             <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
         </Frame.HasShadow>
-		<Frame.BackgroundColor>
-            <OnPlatform x:TypeArguments="Color" iOS="#F1f5F8" Android="White"/>
-		</Frame.BackgroundColor>
-			<StackLayout>
-                <Label TextColor="Black"  Text="{Binding Text}" />
-            </StackLayout>
+		<StackLayout>
+            <Label TextColor="Black"  Text="{Binding Text}" />
+        </StackLayout>
     </Frame>
     <Label Grid.Row="1" FontSize="Micro" Grid.Column="1" HorizontalTextAlignment="End"  Text="{Binding TimeStamp, StringFormat='{0:MM/dd/yyyy hh:mm tt}'}" TextColor="Gray"></Label>
     

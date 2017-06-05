@@ -9,7 +9,7 @@
 			<local:ChatPageTemplateSelector x:Key="MessageTemplateSelector"/>
 		</ResourceDictionary>
 	</ContentPage.Resources>
-	<Grid RowSpacing="0" ColumnSpacing="0">
+	<Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="White">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
@@ -32,9 +32,10 @@
 				HeightRequest="25" 
 				Placeholder="Write here..." 
 				Text="{Binding OutGoingText}"/>
-			<Button 
+               <Button 
                 Image="send.png"
-				Command="{Binding SendCommand}"/>
+				Command="{Binding SendCommand}"
+                BorderColor="#D5DFE6" BorderRadius="0" BackgroundColor="Transparent"/>
 		</StackLayout>
 	</Grid>
 </ContentPage>

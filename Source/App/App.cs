@@ -31,7 +31,7 @@ namespace Topichat.Forms
 
             MainPage = new HomePage
             {
-                BackgroundColor = (Color)Application.Current.Resources["primaryBlue"]
+                BackgroundColor = (Color)Application.Current.Resources["primaryBlue"],
             };
         }
 
