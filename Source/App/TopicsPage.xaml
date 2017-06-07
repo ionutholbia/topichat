@@ -12,12 +12,21 @@
     <StackLayout BackgroundColor="#f1f5f8">
         
     <SearchBar x:Name="searchBar" Placeholder="Topic" SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" />
-    <ListView ItemsSource="{Binding Topics}" Margin="20" ItemTapped="OnListViewItemTapped" ItemSelected="OnListViewItemSelected" BackgroundColor="#f1f5f8">
+    <ListView ItemsSource="{Binding Topics}" ItemTapped="OnListViewItemTapped" ItemSelected="OnListViewItemSelected" BackgroundColor="#f1f5f8" HasUnevenRows="true">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Margin="20,0,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand" />
+                    <ViewCell.ContextActions>
+                        <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
+                    </ViewCell.ContextActions>
+
+                    <StackLayout Margin="20,0,10,0" Padding="0,10,0,10">
+                        <StackLayout Orientation="Horizontal">        
+                            <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource TitleStyle}" Text="{Binding Name}" HorizontalOptions="Start" LineBreakMode="TailTruncation"/>
+                            <Label Grid.Row="0" Grid.Column="1" FontSize="Micro" Text="{Binding LastMessage.TimeStamp, StringFormat='{0:dd/MM/yyyy}'}" WidthRequest="100" TextColor="Gray" HorizontalTextAlignment="End" HorizontalOptions="EndAndExpand"/>                                      
+                        </StackLayout>
+                                
+                        <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource SubtitleTextStyle}" Text="{Binding LastMessage.Text}" LineBreakMode="TailTruncation"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

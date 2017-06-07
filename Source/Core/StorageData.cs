@@ -26,7 +26,7 @@ namespace Topichat.Core
             {
 				new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
 				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
-			}, "id1", "Vacanta la munte") 
+			}, "id1", "Vacanta la munte. Primul meu topic folosind Topichat") 
             {
                 new Message {
                     TimeStamp = DateTime.UtcNow.AddMonths (-1),

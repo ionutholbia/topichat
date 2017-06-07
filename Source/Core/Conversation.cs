@@ -72,7 +72,7 @@ namespace Topichat.Core
 		public void Add(Topic topic)
 		{
 			topic.PropertyChanged += TopicParticipantsChanged;
-			Topics.Add(topic);
+            Topics.Insert(0, topic);
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LastTopic)));
 		}
 

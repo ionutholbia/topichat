@@ -34,6 +34,12 @@ namespace Topichat.Core
 
 		public ObservableCollection<Message> Messages { get; private set; }
 
+        public Message LastMessage => Messages?.LastOrDefault() ?? new Message
+        {
+            Text = "...",
+            TimeStamp = DateTime.MinValue
+        };
+
 		void OnMessagesChanged (object sender, NotifyCollectionChangedEventArgs e)
 		{
 			var participantsChanged = false;

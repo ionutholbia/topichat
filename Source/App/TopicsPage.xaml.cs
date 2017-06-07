@@ -58,5 +58,11 @@ namespace Topichat.Forms
             var conversation = App.ConversationManager.StartConversation(bindingContex.Participants);
             await StartChat(conversation.StartTopic(Guid.NewGuid().ToString(), "New Topic"));
 		}
-    }
+	
+        public void OnDelete(object sender, EventArgs e)
+		{
+			var mi = ((MenuItem)sender);
+			DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
+		}
+	}
 }

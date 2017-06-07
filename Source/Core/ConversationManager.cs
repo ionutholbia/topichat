@@ -82,7 +82,7 @@ namespace Topichat.Core
             var conversation = new Conversation(contacts, me);
  			conversation.PropertyChanged += ReorderConversations;
 			
-            Conversations.Add(conversation);
+            Conversations.Insert(0, conversation);
 
             return conversation;
         }
@@ -95,7 +95,7 @@ namespace Topichat.Core
             {
                 message.Receivers.Add(message.Sender);
                 var conversation = NewConversation(message.Receivers);
-                Conversations.Add(conversation);
+                Conversations.Insert(0, conversation);
 
                 topic = conversation.StartTopic(message.TopicId, message.Topic);
             }
