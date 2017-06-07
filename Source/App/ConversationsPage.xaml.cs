@@ -33,6 +33,11 @@ namespace Topichat.Forms
             {
                 this.conversationsListView.SelectedItem = this.conversationsPageViewModel.Conversations.FirstOrDefault();
             }
+
+            if (this.Parent is MasterDetailPage masterDetailPage)
+            {
+                masterDetailPage.IsPresented = true;
+            }
         }
 
         public static async Task PushConversation(Conversation conversation, MasterDetailPage masterDetailPage)
