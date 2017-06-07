@@ -32,12 +32,11 @@ namespace Topichat.Forms
 					TopicId = topic.Id,
 					TopicName = topic.Name
 				},
-				Title = topic.Name,
 				BackgroundColor = (Color)Application.Current.Resources["primaryBlue"]
 			};
 
 			chatPage.Initialize();
-			await Navigation.PushAsync(chatPage);
+            await Navigation.PushAsync(chatPage);
 		}
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
