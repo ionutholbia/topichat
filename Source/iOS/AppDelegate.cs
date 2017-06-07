@@ -8,12 +8,11 @@ using Topichat.Forms;
 using ImageCircle.Forms.Plugin.iOS;
 using Topichat.Shared;
 using Topichat.Core;
-using XLabs.Forms;
 
 namespace App.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : XFormsApplicationDelegate
+    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
