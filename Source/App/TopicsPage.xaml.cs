@@ -21,7 +21,7 @@ namespace Topichat.Forms
             ((ListView)sender).SelectedItem = null;
         }
 
-        async Task StartChat(Topic topic)
+        public async Task StartChat(Topic topic)
         {
 			var chatPage = new ChatPage
 			{
@@ -55,7 +55,7 @@ namespace Topichat.Forms
         {
             var bindingContex = BindingContext as TopicsPageViewModel;
 
-            var conversation = await App.ConversationManager.StartConversation(bindingContex.Participants);
+            var conversation = App.ConversationManager.StartConversation(bindingContex.Participants);
             await StartChat(conversation.StartTopic(Guid.NewGuid().ToString(), "New Topic"));
 		}
     }

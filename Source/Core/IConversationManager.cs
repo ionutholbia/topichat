@@ -7,9 +7,9 @@ namespace Topichat.Core {
 
 	public interface IConversationManager 
     {
-        ObservableCollection<Conversation> GetConversations ();
+        ObservableCollection<Conversation> Conversations { get; }
 
-        Task<Conversation> StartConversation (List<Contact> contacts);
+		Conversation StartConversation (List<Contact> contacts);
 
         Task SendMessage(Message message);
 	}

@@ -8,11 +8,11 @@ namespace Topichat.Core
     public class ContactManager : IContacts
     {
         static readonly Contact[] dummyContacts = new[] {
-            new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "+40744000000" },
+            new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
             new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
-            new Contact { FirstName = "Andrei", LastName = "Ionescu", PhoneNumber = "+40744222222" },
-            new Contact { FirstName = "Paul", LastName = "Matei", PhoneNumber = "+40744333333" },
-            new Contact { FirstName = "Adrian", LastName = "Maxim", PhoneNumber = "+40744444444" }
+            new Contact { FirstName = "Andrei", LastName = "Ionescu", PhoneNumber = "0040744222222" },
+            new Contact { FirstName = "Paul", LastName = "Matei", PhoneNumber = "0040744333333" },
+            new Contact { FirstName = "Adrian", LastName = "Maxim", PhoneNumber = "0040744444444" }
         };
 
         readonly Contact me = new Contact

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Topichat.Core
@@ -89,6 +90,29 @@ namespace Topichat.Core
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Selected)));
 				}
 			}
+		}
+    }
+
+    class ContactComparer : IEqualityComparer<Contact>
+    {
+        public bool Equals(Contact x, Contact y)
+        {
+            if (Object.ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+			if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+            {
+                return false;
+            }
+
+			return x.PhoneNumber == y.PhoneNumber;
+        }
+
+        public int GetHashCode(Contact contact)
+        {
+			return Object.ReferenceEquals(contact, null) ? 0 : contact.PhoneNumber.GetHashCode();
 		}
     }
 }

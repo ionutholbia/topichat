@@ -53,7 +53,7 @@ namespace Topichat.Core
 			}
 		}
 
-        public string LastTopic => Topics.FirstOrDefault().Name;
+        public string LastTopic => Topics.FirstOrDefault()?.Name ?? "No topics...";
 
 		public string ParticipantsNames
 		{
@@ -73,6 +73,7 @@ namespace Topichat.Core
 		{
 			topic.PropertyChanged += TopicParticipantsChanged;
 			Topics.Add(topic);
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LastTopic)));
 		}
 
         void TopicParticipantsChanged(object sender, PropertyChangedEventArgs e)
@@ -107,9 +108,7 @@ namespace Topichat.Core
         Topic NewTopic(string id, string name)
 		{
             var topic = new Topic(Participants, id, GenerateUniqTopicName(name));
-            topic.PropertyChanged += TopicParticipantsChanged;
-
-            this.Topics.Add(topic);
+            Add(topic);
 
 			return topic;
 		}

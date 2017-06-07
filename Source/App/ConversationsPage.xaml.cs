@@ -18,7 +18,7 @@ namespace Topichat.Forms
         public ConversationsPage()
         {
             InitializeComponent();
-            conversationsPageViewModel = new ConversationsPageViewModel(Navigation);
+            conversationsPageViewModel = new ConversationsPageViewModel(Navigation, this);
             BindingContext = conversationsPageViewModel;
 		}
 
@@ -35,6 +35,31 @@ namespace Topichat.Forms
             }
         }
 
+        public static async Task PushConversation(Conversation conversation, MasterDetailPage masterDetailPage)
+        {
+            var topicsPage = new TopicsPage
+            {
+                BindingContext = new TopicsPageViewModel
+                {
+                    Topics = conversation.Topics,
+                    Participants = conversation.Participants.ToList()
+                },
+                Title = conversation.ParticipantsNames
+            };
+            masterDetailPage.Detail = new NavigationPage(topicsPage)
+			{
+				BarBackgroundColor = (Color)Application.Current.Resources["primaryBlue"],
+				BarTextColor = Color.White
+			};
+
+            if(conversation.Topics.Count == 0)
+            {
+                await topicsPage.StartChat(conversation.StartTopic(Guid.NewGuid().ToString(), "New Topic"));
+            }
+
+			masterDetailPage.IsPresented = false;
+		}
+
 		async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
             var conversation = ((ListView)sender).SelectedItem as Conversation;
@@ -43,23 +68,7 @@ namespace Topichat.Forms
                 return;
             }
 
-			var mainPage = this.Parent as MasterDetailPage;
-
-            mainPage.Detail = new NavigationPage(new TopicsPage
-			{
-				BindingContext = new TopicsPageViewModel
-				{
-					Topics = conversation.Topics,
-					Participants = conversation.Participants.ToList()
-				},
-                Title = conversation.ParticipantsNames,
-            })
-            {
-				BarBackgroundColor = (Color)Application.Current.Resources["primaryBlue"],
-				BarTextColor = Color.White
-			};
-
-            mainPage.IsPresented = false;
+            await PushConversation(conversation, this.Parent as MasterDetailPage);
 		}
 
 		public void OnDelete(object sender, EventArgs e)

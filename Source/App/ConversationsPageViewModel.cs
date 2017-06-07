@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Topichat.Core;
 using Xamarin.Forms;
+
 namespace Topichat.Forms
 {
     public class ConversationsPageViewModel
     {
         readonly INavigation navigation;
+        readonly ConversationsPage masterDetailPage;
 
-        public ConversationsPageViewModel(INavigation navigation)
+        public ConversationsPageViewModel(INavigation navigation, ConversationsPage conversationPage)
         {
             this.navigation = navigation;
-			Conversations = App.ConversationManager?.GetConversations();
+            this.masterDetailPage = conversationPage;
+            Conversations = App.ConversationManager?.Conversations;
 			SearchCommand = new Command<string>(async (text) => await SearchInContactList(text));
 			AddContactCommand = new Command(async () => await OnContactAdded());
 		}
@@ -31,8 +35,16 @@ namespace Topichat.Forms
 
 		async Task OnContactAdded()
 		{
-            await this.navigation.PushModalAsync(new NavigationPage(new ContactsPage())
+			var contactsPage = new ContactsPage();
+            contactsPage.NewConversationRequest += async (selectedContacts) => 
             {
+                await ConversationsPage.PushConversation(
+                    App.ConversationManager.StartConversation(selectedContacts),
+                    this.masterDetailPage.Parent as MasterDetailPage);
+ 			};
+
+			await this.navigation.PushModalAsync(new NavigationPage(contactsPage)
+			{
 				BarBackgroundColor = (Color)Application.Current.Resources["primaryBlue"],
 				BarTextColor = Color.White
 			});
