@@ -51,6 +51,12 @@ namespace Topichat.Forms
 		async Task OnItemFinish(object sender, EventArgs e)
 		{
             await Navigation.PopModalAsync(true);
+
+            if(SelectedContacts.Count == 0)
+            {
+                return;
+            }
+
             foreach(var contact in SelectedContacts)
             {
                 contact.Selected = false;

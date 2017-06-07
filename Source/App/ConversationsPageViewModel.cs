@@ -36,6 +36,7 @@ namespace Topichat.Forms
 		async Task OnContactAdded()
 		{
 			var contactsPage = new ContactsPage();
+
             contactsPage.NewConversationRequest += async (selectedContacts) => 
             {
                 await ConversationsPage.PushConversation(
