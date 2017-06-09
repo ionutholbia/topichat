@@ -14,33 +14,59 @@ using MvvmHelpers;
 
 namespace Topichat.Forms
 {
-    public class ChatPageViewModel : BaseViewModel
+    public class ChatPageViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public ObservableCollection<Message> Messages { get; set; }
 
 		public List<Contact> Participants { get; set; }
 
-        public string TopicName { get; set; }
+        readonly INavigation navigation;
+
+        string topicName;
+
+        public string TopicName 
+        { 
+            get
+            {
+                return this.topicName;
+            } 
+            set
+            {
+                this.topicName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TopicName)));
+
+                var topic = App.ConversationManager?.FindTopic(Participants, TopicId)?.Name;
+                if(topic != null && topic != this.topicName)
+                {
+                    topic = this.topicName;
+                }
+            } 
+        } 
 
         public string TopicId { get; set; }
 
 		string outgoingText = string.Empty;
-		public string OutGoingText
+
+        public string OutGoingText
 		{
 			get { return outgoingText; }
 			set { SetProperty(ref outgoingText, value); }
 		}
 
-		public ICommand SendCommand { get; set; }
+		public event PropertyChangedEventHandler PropertyChanged;
 
+		public ICommand SendCommand { get; set; }
+        		
         public ICommand LocationCommand { get; set; }
 
-        public ChatPageViewModel()
+        public ChatPageViewModel(INavigation navigation)
         {
+            this.navigation = navigation;
+
             SendCommand = new Command(async () => await SendMessage(OutGoingText));
         }
 
-		async Task SendMessage(string text)
+        async Task SendMessage(string text)
         {
             if(string.IsNullOrEmpty(text))
             {

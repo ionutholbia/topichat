@@ -78,7 +78,10 @@ namespace Topichat.Core
 
         void TopicParticipantsChanged(object sender, PropertyChangedEventArgs e)
         {
-            PropertyChanged?.Invoke(sender, e);
+            if(e.PropertyName == "Participants")
+            {
+				PropertyChanged?.Invoke(sender, e);
+			}
         }
         		
         IEnumerator IEnumerable.GetEnumerator()

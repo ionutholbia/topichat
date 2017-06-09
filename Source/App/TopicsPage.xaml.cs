@@ -25,7 +25,7 @@ namespace Topichat.Forms
         {
 			var chatPage = new ChatPage
 			{
-				BindingContext = new ChatPageViewModel
+                BindingContext = new ChatPageViewModel(Navigation)
 				{
 					Messages = topic.Messages,
                     Participants = topic.Participants.ToList(),
@@ -53,10 +53,21 @@ namespace Topichat.Forms
 
         async void OnItemAdded(object sender, EventArgs e)
         {
-            var bindingContex = BindingContext as TopicsPageViewModel;
+			var editPageContext = new EditPageViewModel("Enter Topic Name...");
+			editPageContext.EditFinished += async (s, ev) =>
+			{
+				var topicName = ev == "Enter Topic Name..." ? "New Topic" : ev;
+                await Navigation.PopModalAsync(true);
 
-            var conversation = App.ConversationManager.StartConversation(bindingContex.Participants);
-            await StartChat(conversation.StartTopic(Guid.NewGuid().ToString(), "New Topic"));
+				var bindingContex = BindingContext as TopicsPageViewModel;
+				var conversation = App.ConversationManager.StartConversation(bindingContex.Participants);
+                await StartChat(conversation.StartTopic(Guid.NewGuid().ToString(), topicName));
+			};
+
+			await Navigation.PushModalAsync(new EditPage
+			{
+				BindingContext = editPageContext
+			}, true);
 		}
 	
         public void OnDelete(object sender, EventArgs e)

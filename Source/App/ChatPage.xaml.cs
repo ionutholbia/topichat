@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,5 +37,5 @@ namespace Topichat.Forms
         {
             MessagesListView.SelectedItem = null;
         }
-    }
+	}
 }

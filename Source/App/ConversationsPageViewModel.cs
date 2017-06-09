@@ -39,9 +39,29 @@ namespace Topichat.Forms
 
             contactsPage.NewConversationRequest += async (selectedContacts) => 
             {
-                await ConversationsPage.PushConversation(
-                    App.ConversationManager.StartConversation(selectedContacts),
-                    this.masterDetailPage.Parent as MasterDetailPage);
+                if (App.ConversationManager.FindConversation(selectedContacts) != null)
+                {
+					await ConversationsPage.PushConversation(
+						App.ConversationManager.StartConversation(selectedContacts),
+						this.masterDetailPage.Parent as MasterDetailPage);
+                    return;
+				}
+
+				var editPageContext = new EditPageViewModel("Enter Topic Name...");
+				editPageContext.EditFinished += async (sender, e) =>
+				{
+                    var topicName = e == "Enter Topic Name..." ? "New Topic" : e;
+					await this.navigation.PopModalAsync(true);
+					await ConversationsPage.PushConversation(
+						App.ConversationManager.StartConversation(selectedContacts),
+						this.masterDetailPage.Parent as MasterDetailPage,
+						topicName);
+				};
+				
+                await this.navigation.PushModalAsync(new EditPage
+				{
+                    BindingContext = editPageContext
+				}, true);
  			};
 
 			await this.navigation.PushModalAsync(new NavigationPage(contactsPage)

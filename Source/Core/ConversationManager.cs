@@ -102,5 +102,17 @@ namespace Topichat.Core
 
             topic.Add(message);
         }
+
+        public Conversation FindConversation(List<Contact> participants)
+        {
+            return Conversations.FirstOrDefault(
+				c => c.Participants.Where(p => p.PhoneNumber != this.me.PhoneNumber).
+                SequenceEqual(participants.Where(p => p.PhoneNumber != this.me.PhoneNumber), new ContactComparer()));
+        }
+
+        public Topic FindTopic(List<Contact> participants, string topicId)
+        {
+            return FindConversation(participants)?.Topics.FirstOrDefault(top => top.Id == topicId);
+        }
     }
 }

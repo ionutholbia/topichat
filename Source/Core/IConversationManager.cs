@@ -11,6 +11,10 @@ namespace Topichat.Core {
 
 		Conversation StartConversation (List<Contact> contacts);
 
+        Conversation FindConversation(List<Contact> participants);
+
+        Topic FindTopic(List<Contact> participants, string topicId);
+
         Task SendMessage(Message message);
 	}
 }

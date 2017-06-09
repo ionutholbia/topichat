@@ -9,7 +9,6 @@
 			<local:ChatPageTemplateSelector x:Key="MessageTemplateSelector"/>
 		</ResourceDictionary>
 	</ContentPage.Resources>
-
 	<Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="White">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />

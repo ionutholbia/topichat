@@ -26,7 +26,19 @@ namespace Topichat.Core
 
         public string Id { get; private set; }
 
-        public string Name { get;  set; }
+        string name;
+        public string Name 
+        { 
+            get
+            {
+                return this.name;   
+            } 
+            set
+            {
+                this.name = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
+            }
+        }
 
         public IEnumerable<Contact> Participants => this.participants;
 

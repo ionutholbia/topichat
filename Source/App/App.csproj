@@ -47,6 +47,9 @@
     <EmbeddedResource Include="ChatPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TopicsPage.xaml.cs">
@@ -77,6 +80,10 @@
     </Compile>
     <Compile Include="ChatPageViewModel.cs" />
     <Compile Include="ChatPageTemplateSelector.cs" />
+    <Compile Include="EditPage.xaml.cs">
+      <DependentUpon>EditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditPageViewModel.cs" />
  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

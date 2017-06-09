@@ -40,7 +40,8 @@ namespace Topichat.Forms
             }
         }
 
-        public static async Task PushConversation(Conversation conversation, MasterDetailPage masterDetailPage)
+        public static async Task PushConversation(
+            Conversation conversation, MasterDetailPage masterDetailPage, string defaultTopicName = "New Topic")
         {
             var topicsPage = new TopicsPage
             {
@@ -59,7 +60,7 @@ namespace Topichat.Forms
 
             if(conversation.Topics.Count == 0)
             {
-                await topicsPage.StartChat(conversation.StartTopic(Guid.NewGuid().ToString(), "New Topic"));
+                await topicsPage.StartChat(conversation.StartTopic(Guid.NewGuid().ToString(), defaultTopicName));
             }
 
 			masterDetailPage.IsPresented = false;
