@@ -159,6 +159,7 @@
     <AndroidResource Include="Resources\drawable\unknowncontact.png" />
     <AndroidResource Include="Resources\drawable\write.png" />
     <AndroidResource Include="Resources\drawable\icon.png" />
+    <AndroidResource Include="Resources\drawable\checked.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App\App.csproj">
