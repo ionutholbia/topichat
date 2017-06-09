@@ -47,10 +47,13 @@ namespace Topichat.Forms
                     return;
 				}
 
-				var editPageContext = new EditPageViewModel("Enter Topic Name...");
+                var editPageContext = new EditPageViewModel
+                {
+                    DefaultText="Enter Topic Name..."
+                };
 				editPageContext.EditFinished += async (sender, e) =>
 				{
-                    var topicName = e == "Enter Topic Name..." ? "New Topic" : e;
+					var topicName = string.IsNullOrEmpty(e) ? "New Topic" : e;
 					await this.navigation.PopModalAsync(true);
 					await ConversationsPage.PushConversation(
 						App.ConversationManager.StartConversation(selectedContacts),

@@ -11,5 +11,10 @@ namespace Topichat.Forms
         {
             InitializeComponent();
         }
+
+        protected override async void OnAppearing()
+        {
+            textEntry?.Focus();
+        }
     }
 }

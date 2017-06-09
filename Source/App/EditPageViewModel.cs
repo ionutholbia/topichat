@@ -7,17 +7,17 @@ namespace Topichat.Forms
 {
     public class EditPageViewModel
     {
-        public EditPageViewModel(string defaultText)
+        public EditPageViewModel()
         {
-            Text = defaultText;
-
 			EditCommand = new Command(() =>
 			{
                 EditFinished?.Invoke(this, Text);
 			});
 		}
 
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
+
+        public string DefaultText { get; set; } = "Enter text...";
 	
         public ICommand EditCommand { get; set; }
 

@@ -53,10 +53,14 @@ namespace Topichat.Forms
 
         async void OnItemAdded(object sender, EventArgs e)
         {
-			var editPageContext = new EditPageViewModel("Enter Topic Name...");
+            var editPageContext = new EditPageViewModel
+            {
+                DefaultText = "Enter Topic Name..."    
+            };
+
 			editPageContext.EditFinished += async (s, ev) =>
 			{
-				var topicName = ev == "Enter Topic Name..." ? "New Topic" : ev;
+                var topicName = string.IsNullOrEmpty(ev) ? "New Topic" : ev;
                 await Navigation.PopModalAsync(true);
 
 				var bindingContex = BindingContext as TopicsPageViewModel;
