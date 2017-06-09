@@ -5,13 +5,13 @@
     xmlns:local="clr-namespace:Topichat.Forms" 
     x:Class="Topichat.Forms.ConversationsPage"
     Padding="0,60,0,0" 
-    Icon="contacts.png" 
+    Icon="conversations.png" 
     BackgroundColor="#509ee2" 
     Title="Conversations">
     <ContentPage.Content>
         <StackLayout BackgroundColor="#f1f5f8">
             <StackLayout Orientation="Vertical" Padding="0,0,0,20" BackgroundColor="#509ee2">
-                <Image Source="addcontact.png" HorizontalOptions="End" Margin="0,0,20,0">
+                <Image Source="contacts.png" HorizontalOptions="End" Margin="0,0,20,0">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding AddContactCommand}"/>
                     </Image.GestureRecognizers>
