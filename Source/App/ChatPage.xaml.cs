@@ -21,7 +21,7 @@ namespace Topichat.Forms
                 throw new NullReferenceException("Binding context is not initialized.");
             }
 
-            chatPageViewModel.Messages.CollectionChanged += (sender, e) => ScrollListViewToEnd();
+            chatPageViewModel.ChatTopic.Messages.CollectionChanged += (sender, e) => ScrollListViewToEnd();
 
             ScrollListViewToEnd();
 		}
@@ -34,12 +34,12 @@ namespace Topichat.Forms
                 return;
             }
 
-            if(chatPageViewModel.Messages.Count < 1)
+            if(chatPageViewModel.ChatTopic.Messages.Count < 1)
             {
                 return;
             }
 
-            var target = chatPageViewModel.Messages[chatPageViewModel.Messages.Count - 1];
+            var target = chatPageViewModel.ChatTopic.Messages[chatPageViewModel.ChatTopic.Messages.Count - 1];
 			MessagesListView.ScrollTo(target, ScrollToPosition.End, true);
 		}
 

@@ -20,7 +20,7 @@
 		<ListView 
 			x:Name="MessagesListView" 
 			ItemTemplate="{StaticResource MessageTemplateSelector}" 
-			ItemsSource="{Binding Messages}" 
+			ItemsSource="{Binding ChatTopic.Messages}" 
 			HasUnevenRows="True" 
 			ItemSelected="MessagesListViewItemSelected" 
 			ItemTapped="MessagesListViewItemTapped" 

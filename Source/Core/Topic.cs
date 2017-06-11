@@ -74,6 +74,7 @@ namespace Topichat.Core
             msg.TopicId = Id;
             msg.Topic = Name;
 			Messages.Add (msg);
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LastMessage)));
 		}
 
 		public IEnumerator<Message> GetEnumerator ()

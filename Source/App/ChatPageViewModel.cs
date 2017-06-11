@@ -16,31 +16,9 @@ namespace Topichat.Forms
 {
     public class ChatPageViewModel : BaseViewModel
     {
-        public ObservableCollection<Message> Messages { get; set; }
-
-		public List<Contact> Participants { get; set; }
+        public Topic ChatTopic{ get; set; }
 
         readonly INavigation navigation;
-
-        string topicName;
-        public string TopicName 
-        { 
-            get
-            {
-                return this.topicName;
-            } 
-            set
-            {
-                SetProperty(ref topicName, value);
-                var topic = App.ConversationManager?.FindTopic(Participants, TopicId)?.Name;
-                if(topic != null && topic != this.topicName)
-                {
-                    topic = this.topicName;
-                }
-            } 
-        } 
-
-        public string TopicId { get; set; }
 
 		string outgoingText = string.Empty;
         public string OutGoingText
@@ -71,14 +49,14 @@ namespace Topichat.Forms
             {
                 Text = text,
                 Sender = App.ContactManager.Me,
-                Receivers = Participants,
+                Receivers = ChatTopic.Participants.Where(p => p.PhoneNumber != App.ContactManager.Me.PhoneNumber).ToList(),
                 TimeStamp = DateTime.Now,
-                Topic = TopicName,
-                TopicId = TopicId
+                Topic = ChatTopic.Name,
+                TopicId = ChatTopic.Id
             };
 
             await App.ConversationManager.SendMessage(message);
-            Messages.Add(message);
+            ChatTopic.Add(message);
             OutGoingText = string.Empty;
         }            
 	}
