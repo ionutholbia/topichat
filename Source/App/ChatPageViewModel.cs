@@ -14,7 +14,7 @@ using MvvmHelpers;
 
 namespace Topichat.Forms
 {
-    public class ChatPageViewModel : BaseViewModel, INotifyPropertyChanged
+    public class ChatPageViewModel : BaseViewModel
     {
         public ObservableCollection<Message> Messages { get; set; }
 
@@ -23,7 +23,6 @@ namespace Topichat.Forms
         readonly INavigation navigation;
 
         string topicName;
-
         public string TopicName 
         { 
             get
@@ -32,9 +31,7 @@ namespace Topichat.Forms
             } 
             set
             {
-                this.topicName = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TopicName)));
-
+                SetProperty(ref topicName, value);
                 var topic = App.ConversationManager?.FindTopic(Participants, TopicId)?.Name;
                 if(topic != null && topic != this.topicName)
                 {
@@ -46,14 +43,11 @@ namespace Topichat.Forms
         public string TopicId { get; set; }
 
 		string outgoingText = string.Empty;
-
         public string OutGoingText
 		{
 			get { return outgoingText; }
 			set { SetProperty(ref outgoingText, value); }
 		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
 
 		public ICommand SendCommand { get; set; }
         		
@@ -84,7 +78,6 @@ namespace Topichat.Forms
             };
 
             await App.ConversationManager.SendMessage(message);
-
             Messages.Add(message);
             OutGoingText = string.Empty;
         }            

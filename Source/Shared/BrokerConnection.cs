@@ -117,7 +117,8 @@ namespace Topichat.Shared
                 TopicId = topicLevels[2],
                 Topic = topicLevels[3],
                 Receivers = receivers,
-                Sender = new Contact { PhoneNumber = topicLevels[5] }
+                Sender = new Contact { PhoneNumber = topicLevels[5] },
+                TimeStamp = DateTime.Now
             };
         }
 

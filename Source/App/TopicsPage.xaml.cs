@@ -28,7 +28,7 @@ namespace Topichat.Forms
                 BindingContext = new ChatPageViewModel(Navigation)
 				{
 					Messages = topic.Messages,
-                    Participants = topic.Participants.ToList(),
+                    Participants = topic.Participants.Where(p => p.PhoneNumber != App.ContactManager.Me.PhoneNumber).ToList(),
 					TopicId = topic.Id,
 					TopicName = topic.Name
 				},
