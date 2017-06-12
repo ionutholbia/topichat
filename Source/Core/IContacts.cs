@@ -8,6 +8,8 @@ namespace Topichat.Core
     {
         Contact Me { get; }
 
-        ObservableCollection<Contact> GetContacts();
+        ObservableCollection<Contact> Contacts { get; }
+
+        Contact FindContact(string phoneNumber);
     }
 }

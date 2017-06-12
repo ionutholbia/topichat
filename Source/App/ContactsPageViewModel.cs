@@ -10,7 +10,7 @@ namespace Topichat.Forms
     {
         public ContactsPageViewModel()
         {
-            Contacts = App.ContactManager.GetContacts();
+            Contacts = App.ContactManager.Contacts;
             SearchCommand = new Command<string>(async(text) => await SearchInContactList(text));
         }
 

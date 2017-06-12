@@ -27,10 +27,11 @@ namespace App.Droid
             Forms.Init(this, savedInstanceState);
             ImageCircleRenderer.Init();
 
- 			LoadApplication(new Topichat.Forms.App(
-				new ContactManager(),
+			var contactManager = new ContactManager();
+			LoadApplication(new Topichat.Forms.App(
+				contactManager,
 				new ConversationManager(
-					new BrokerConnection(StorageData.Me.PhoneNumber),
+					new BrokerConnection(contactManager),
 					new StorageData(),
 					StorageData.Me)));
 		}
