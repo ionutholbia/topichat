@@ -15,7 +15,7 @@ namespace Topichat.Forms
 			});
 		}
 
-        public string Text { get; set; } = string.Empty;
+		public string Text { get; set; } = string.Empty;
 
         public string DefaultText { get; set; } = "Enter text...";
 	

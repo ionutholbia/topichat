@@ -27,10 +27,7 @@ namespace Topichat.Forms
 			{
                 BindingContext = new ChatPageViewModel(Navigation)
 				{
-					Messages = topic.Messages,
-                    Participants = topic.Participants.ToList(),
-					TopicId = topic.Id,
-					TopicName = topic.Name
+                    ChatTopic = topic
 				},
 				Title = topic.Name,
 				BackgroundColor = (Color)Application.Current.Resources["primaryBlue"]

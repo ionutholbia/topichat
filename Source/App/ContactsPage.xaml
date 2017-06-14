@@ -44,7 +44,7 @@
                             </controls:CircleImage>
                             <StackLayout Grid.Column="1" Orientation="Horizontal">
                                 <Label Text="{Binding FirstName}" Style="{DynamicResource TitleStyle}" />
-                                <Image Source="speech.png" HorizontalOptions="EndAndExpand" IsVisible="{Binding Selected}"/>
+                                <Image Source="checked.png" HorizontalOptions="EndAndExpand" IsVisible="{Binding Selected}"/>
                             </StackLayout>
 							<Label Grid.Row="1" Grid.Column="1" Text="{Binding LastName}" VerticalOptions="End" Style="{DynamicResource SubtitleTextStyle}" />
 						</Grid>

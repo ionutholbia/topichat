@@ -19,10 +19,11 @@ namespace App.iOS
             global::Xamarin.Forms.Forms.Init();
             ImageCircleRenderer.Init();
 
+            var contactManager = new ContactManager();
             LoadApplication(new Topichat.Forms.App(
-                new ContactManager(),
+                contactManager,
                 new ConversationManager(
-                    new BrokerConnection(StorageData.Me.PhoneNumber),
+                    new BrokerConnection(contactManager),
                     new StorageData(),
                     StorageData.Me)));
 

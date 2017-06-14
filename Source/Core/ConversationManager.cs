@@ -79,7 +79,7 @@ namespace Topichat.Core
 
         Conversation NewConversation(List<Contact> contacts)
         {
-            var conversation = new Conversation(contacts, me);
+            var conversation = new Conversation(contacts.Where(c => c.PhoneNumber != me.PhoneNumber), me);
  			conversation.PropertyChanged += ReorderConversations;
 			
             Conversations.Insert(0, conversation);
@@ -93,10 +93,10 @@ namespace Topichat.Core
                             .FirstOrDefault(top => top.Id == message.TopicId);
             if (topic == null)
             {
-                message.Receivers.Add(message.Sender);
-                var conversation = NewConversation(message.Receivers);
-                Conversations.Insert(0, conversation);
+                var participants = new List<Contact>(message.Receivers);
+                participants.Add(message.Sender);
 
+                var conversation = StartConversation(participants);
                 topic = conversation.StartTopic(message.TopicId, message.Topic);
             }
 

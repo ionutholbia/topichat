@@ -21,11 +21,26 @@ namespace Topichat.Forms
                 throw new NullReferenceException("Binding context is not initialized.");
             }
 
-			chatPageViewModel.Messages.CollectionChanged += (sender, e) =>
-			{
-				var target = chatPageViewModel.Messages[chatPageViewModel.Messages.Count - 1];
-				MessagesListView.ScrollTo(target, ScrollToPosition.End, true);
-			};
+            chatPageViewModel.ChatTopic.Messages.CollectionChanged += (sender, e) => ScrollListViewToEnd();
+
+            ScrollListViewToEnd();
+		}
+
+		public void ScrollListViewToEnd()
+		{
+			var chatPageViewModel = BindingContext as ChatPageViewModel;
+            if(chatPageViewModel == null)
+            {
+                return;
+            }
+
+            if(chatPageViewModel.ChatTopic.Messages.Count < 1)
+            {
+                return;
+            }
+
+            var target = chatPageViewModel.ChatTopic.Messages[chatPageViewModel.ChatTopic.Messages.Count - 1];
+			MessagesListView.ScrollTo(target, ScrollToPosition.End, true);
 		}
 
         void MessagesListViewItemSelected(object sender, SelectedItemChangedEventArgs e)

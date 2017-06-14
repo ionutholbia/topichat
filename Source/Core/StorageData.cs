@@ -41,7 +41,6 @@ namespace Topichat.Core
 			},
 			new Topic(new Contact []
 			{
-				new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
 				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
 			},"id2", "Proiect facultate") {
 				new Message {TimeStamp = DateTime.UtcNow.AddMonths (-1), Sender = dummyContacts [1], Text = "Sal!", Topic = "Default"},

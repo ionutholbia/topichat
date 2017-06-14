@@ -16,18 +16,18 @@ namespace Topichat.Shared
         const string MqttTopicPrefix = "message";
 
         readonly MqttClient mqttClient;
-        readonly string clientId;
+        readonly ContactManager contactManager;
 
-        public BrokerConnection(string clientId)
+        public BrokerConnection(ContactManager contactManager)
         {
+            this.contactManager = contactManager;
             this.mqttClient = new MqttClient(BrokerUrl);
-            this.clientId = clientId;
 
             this.mqttClient.MqttMsgPublishReceived += MqttMsgPublishReceived;
-            this.mqttClient.Connect(clientId);
+            this.mqttClient.Connect(contactManager.Me.PhoneNumber);
             if (this.mqttClient.IsConnected)
             {
-                this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{this.clientId}/#" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{contactManager.Me.PhoneNumber}/#" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
             }
         }
 
@@ -45,7 +45,7 @@ namespace Topichat.Shared
             foreach (var receiver in message.Receivers)
             {
                 await Task.Run(() => this.mqttClient.Publish(
-                    $"{MqttTopicPrefix}/{receiver.PhoneNumber}/{message.TopicId}/{message.Topic}/{receiversStrings}/{this.clientId}",
+                    $"{MqttTopicPrefix}/{receiver.PhoneNumber}/{message.TopicId}/{message.Topic}/{receiversStrings}/{this.contactManager.Me.PhoneNumber}",
                     Encoding.UTF8.GetBytes(message.Text),
                     MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
                     false));
@@ -95,7 +95,7 @@ namespace Topichat.Shared
             var receivers = new List<Contact>();
             foreach (var phoneNumber in receiversPhoneNumber)
             {
-                receivers.Add(new Contact { PhoneNumber = phoneNumber });
+                receivers.Add(this.contactManager.FindContact(phoneNumber));
             }
 
             return receivers;
@@ -104,22 +104,17 @@ namespace Topichat.Shared
         Message DecodeMessage(MqttMsgPublishEventArgs eventArgs)
         {
             var topicLevels = SplitString(eventArgs.Topic, '/');
-            return DecodeGroupMessage(topicLevels, Encoding.UTF8.GetString(eventArgs.Message, 0, eventArgs.Message.Length));
-        }
 
-        Message DecodeGroupMessage(List<string> topicLevels, string text)
-        {
-            var receivers = DecodeOtherReceivers(topicLevels[4]);
-
-            return new Message
-            {
-                Text = text,
-                TopicId = topicLevels[2],
-                Topic = topicLevels[3],
-                Receivers = receivers,
-                Sender = new Contact { PhoneNumber = topicLevels[5] }
-            };
-        }
+			return new Message
+			{
+				Text = Encoding.UTF8.GetString(eventArgs.Message, 0, eventArgs.Message.Length),
+				TopicId = topicLevels[2],
+				Topic = topicLevels[3],
+				Receivers = DecodeOtherReceivers(topicLevels[4]),
+                Sender = this.contactManager.FindContact(topicLevels[5]),
+				TimeStamp = DateTime.Now
+			};
+		}
 
         public void Dispose()
         {
