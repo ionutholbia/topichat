@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
@@ -22,7 +22,7 @@ namespace Topichat.Core
         };
         		
         static readonly Topic [] dummyConversations = new[] {
-            new Topic(new Contact [] 
+            new Topic(Me, new Contact [] 
             {
 				new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
 				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
@@ -39,7 +39,7 @@ namespace Topichat.Core
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = dummyContacts [1], Text = "ok", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = Me, Text = "Acesta este un mesaj foarte lung folosit pentru a testa daca se afiseaza corect in aplicatiile noastre.", Topic = "Default"}
 			},
-			new Topic(new Contact []
+			new Topic(Me, new Contact []
 			{
 				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
 			},"id2", "Proiect facultate") {

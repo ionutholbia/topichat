@@ -13,8 +13,9 @@ namespace Topichat.Core
     {
 		public event PropertyChangedEventHandler PropertyChanged;
 
-        public Topic(IEnumerable<Contact> otherParties, string id, string topic)
+        public Topic(Contact me, IEnumerable<Contact> otherParties, string id, string topic)
         {
+            Me = me;
 			participants = new List<Contact>(otherParties);
 			Messages = new ObservableCollection<Message>();
 			Messages.CollectionChanged += OnMessagesChanged;
@@ -38,6 +39,8 @@ namespace Topichat.Core
             }
         }
 
+        Contact Me { get; set; }
+
         public IEnumerable<Contact> Participants => this.participants;
 
 		List<Contact> participants;
@@ -54,7 +57,8 @@ namespace Topichat.Core
 		{
 			var participantsChanged = false;
 			foreach (Message msg in e.NewItems) {
-                if (participants.SingleOrDefault(part => part.PhoneNumber == msg.Sender.PhoneNumber) == null) 
+                if (Me.PhoneNumber != msg.Sender.PhoneNumber &&
+                    participants.SingleOrDefault(part => part.PhoneNumber == msg.Sender.PhoneNumber) == null) 
                 {
 					participants.Add (msg.Sender);
 					participantsChanged = true;

@@ -7,7 +7,6 @@ namespace Topichat.Core.UnitTest
     public class TopicTest
     {
 		static readonly Contact[] dummyContacts = new[] {
-			new Contact { FirstName = "Me", LastName = "User", PhoneNumber = "111" },
 			new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
 			new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
 			new Contact { FirstName = "Andrei", LastName = "Ionescu", PhoneNumber = "0040744222222" },
@@ -27,7 +26,7 @@ namespace Topichat.Core.UnitTest
         [SetUp]
         public void SetUp()
         {
-            topic = new Topic(dummyContacts, "id1", "test");
+            topic = new Topic(me, dummyContacts, "id1", "test");
         }
 
         [Test]

@@ -23,7 +23,7 @@ namespace Topichat.Core.UnitTest
 		};
 
 		static readonly Topic[] dummyTopics = new[] {
-			new Topic(new Contact []
+			new Topic(me, new Contact []
 			{
 				new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
 				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
@@ -40,7 +40,7 @@ namespace Topichat.Core.UnitTest
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = dummyContacts [1], Text = "ok", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = me, Text = "This is a really long message to test that the preview and message bubbles wrap as expected. Hooray!", Topic = "Default"}
 			},
-			new Topic(new Contact []
+			new Topic(me, new Contact []
 			{
 				new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
 				new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },

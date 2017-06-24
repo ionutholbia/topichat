@@ -115,7 +115,7 @@ namespace Topichat.Core
         		
         Topic NewTopic(string id, string name)
 		{
-            var topic = new Topic(Participants, id, GenerateUniqTopicName(name));
+            var topic = new Topic(this.me, Participants, id, GenerateUniqTopicName(name));
             Add(topic);
 
 			return topic;
