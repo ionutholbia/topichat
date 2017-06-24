@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,8 @@ namespace Topichat.Core
 {
     public class ContactManager : IContacts
     {
-        static readonly Contact[] dummyContacts = new[] {
+
+		static readonly Contact[] dummyContacts = new[] {
             new Contact { FirstName = "Olesea", LastName = "Holbia", PhoneNumber = "0040744000000" },
             new Contact { FirstName = "Luca", LastName = "Stefan", PhoneNumber = "999" },
             new Contact { FirstName = "Andrei", LastName = "Ionescu", PhoneNumber = "0040744222222" },

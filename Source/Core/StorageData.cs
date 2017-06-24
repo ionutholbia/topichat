@@ -37,7 +37,7 @@ namespace Topichat.Core
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = dummyContacts [0], Text = "Hey", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = Me, Text = "nimic interesant...", Topic = "Default"},
 				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = dummyContacts [1], Text = "ok", Topic = "Default"},
-				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = Me, Text = "This is a really long message to test that the preview and message bubbles wrap as expected. Hooray!", Topic = "Default"}
+				new Message {TimeStamp = DateTime.UtcNow.AddMinutes (-1), Sender = Me, Text = "Acesta este un mesaj foarte lung folosit pentru a testa daca se afiseaza corect in aplicatiile noastre.", Topic = "Default"}
 			},
 			new Topic(new Contact []
 			{

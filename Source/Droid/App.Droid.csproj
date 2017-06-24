@@ -66,9 +66,6 @@
       <HintPath>..\packages\M2MqttDotnetCore.1.0.5\lib\netstandard1.6\M2Mqtt.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Serilog">
-      <HintPath>..\packages\Serilog.2.4.0\lib\netstandard1.3\Serilog.dll</HintPath>
-    </Reference>
     <Reference Include="FormsViewGroup">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
@@ -131,6 +128,9 @@
     </Reference>
     <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
       <HintPath>..\packages\Xamarin.Android.Support.v7.MediaRouter.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>..\packages\Serilog.2.5.0\lib\netstandard1.3\Serilog.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

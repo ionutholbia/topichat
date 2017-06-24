@@ -32,11 +32,6 @@ namespace Topichat.Forms
             if(this.conversationsListView.SelectedItem == null)
             {
                 this.conversationsListView.SelectedItem = this.conversationsPageViewModel.Conversations.FirstOrDefault();
-			
-                if (this.Parent is MasterDetailPage masterDetailPage)
-				{
-					masterDetailPage.IsPresented = true;
-				}
 			}
         }
 
