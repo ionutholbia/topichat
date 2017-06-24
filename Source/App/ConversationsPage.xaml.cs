@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -27,12 +27,15 @@ namespace Topichat.Forms
 			((ListView)sender).SelectedItem = null;
 		}
 
+        bool appeard = false;
 		protected override async void OnAppearing()
         {
             if(this.conversationsListView.SelectedItem == null &&
-               this.conversationsPageViewModel.Conversations.Count > 0)
+               this.conversationsPageViewModel.Conversations.Count > 0 &&
+               appeard == false)
             {
                 this.conversationsListView.SelectedItem = this.conversationsPageViewModel.Conversations.FirstOrDefault();
+                appeard = true;
 			}
         }
 
