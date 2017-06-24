@@ -73,8 +73,17 @@ namespace Topichat.Forms
 	
         public void OnDelete(object sender, EventArgs e)
 		{
-			var mi = ((MenuItem)sender);
-			DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
+            var menuItem = ((MenuItem)sender);
+			
+            var bindingContex = BindingContext as TopicsPageViewModel;
+			var conversation = App.ConversationManager.FindConversation(bindingContex.Participants);
+            if(conversation == null)
+            {
+				DisplayAlert("Topichat", "Error deleting topic!", "OK");
+                return;
+			}
+			
+            conversation.DeleteTopic(menuItem.CommandParameter as Topic);
 		}
 	}
 }

@@ -40,6 +40,11 @@ namespace Topichat.Core
             return Topics.SingleOrDefault(top => top.Id == id) ?? NewTopic(id, name);
 		}
 
+        public void DeleteTopic(Topic topic)
+        {
+            Topics.Remove(topic);
+        }
+
 		public string ImageUrl
 		{
 			get

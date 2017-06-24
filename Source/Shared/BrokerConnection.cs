@@ -15,21 +15,28 @@ namespace Topichat.Shared
 
         const string MqttTopicPrefix = "message";
 
-        readonly MqttClient mqttClient;
         readonly ContactManager contactManager;
+		MqttClient mqttClient;
 
-        public BrokerConnection(ContactManager contactManager)
+		public BrokerConnection(ContactManager contactManager)
         {
             this.contactManager = contactManager;
-            this.mqttClient = new MqttClient(BrokerUrl);
-
-            this.mqttClient.MqttMsgPublishReceived += MqttMsgPublishReceived;
-            this.mqttClient.Connect(contactManager.Me.PhoneNumber);
-            if (this.mqttClient.IsConnected)
-            {
-                this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{contactManager.Me.PhoneNumber}/#" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-            }
         }
+
+        public async Task Connect()
+        {
+            await Task.Run(() =>
+            {
+				this.mqttClient = new MqttClient(BrokerUrl);
+
+				this.mqttClient.MqttMsgPublishReceived += MqttMsgPublishReceived;
+				this.mqttClient.Connect(contactManager.Me.PhoneNumber);
+				if (this.mqttClient.IsConnected)
+				{
+					this.mqttClient.Subscribe(new string[] { $"{MqttTopicPrefix}/{contactManager.Me.PhoneNumber}/#" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+				}
+			});
+		}
 
         public Action<Message> MessageReceived { get; set;}
 

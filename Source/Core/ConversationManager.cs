@@ -1,8 +1,9 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Topichat.Core
@@ -18,28 +19,32 @@ namespace Topichat.Core
             this.brokerConnection = brokerManager;
             this.storageData = storageData;
             this.me = me;
-
-            this.brokerConnection.MessageReceived += BrokerConnectionMessageReceived;
         }
 
-		ObservableCollection<Conversation> conv;
-		public ObservableCollection<Conversation> Conversations
-		{
-			get
-			{
-				if (conv == null)
-				{
-					conv = new ObservableCollection<Conversation>();
-					this.storageData.GetConversations(conv);
-				}
+        ObservableCollection<Conversation> conv;
+        public ObservableCollection<Conversation> Conversations
+        {
+            get
+            {
+                if (conv == null)
+                {
+                    conv = new ObservableCollection<Conversation>();
+                    this.storageData.GetConversations(conv);
+                }
 
-				foreach (var conversation in conv)
-				{
-					conversation.PropertyChanged += ReorderConversations;
-				}
+                foreach (var conversation in conv)
+                {
+                    conversation.PropertyChanged += ReorderConversations;
+                }
 
-				return conv;
-			}
+                return conv;
+            }
+        }
+
+        public async Task ConnectToBroker()
+        {
+			await this.brokerConnection.Connect();
+			this.brokerConnection.MessageReceived += BrokerConnectionMessageReceived;
 		}
 
         public async Task SendMessage(Message message)
@@ -48,41 +53,41 @@ namespace Topichat.Core
         }
 
         public Conversation StartConversation(List<Contact> contacts)
-		{
-			var conversation = Conversations.FirstOrDefault(
+        {
+            var conversation = Conversations.FirstOrDefault(
                 c => c.Participants.Where(p => p.PhoneNumber != this.me.PhoneNumber).
                 SequenceEqual(contacts, new ContactComparer()));
 
-			return conversation ?? NewConversation(contacts);
-		}
-		
+            return conversation ?? NewConversation(contacts);
+        }
+
         void ReorderConversations(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName != "Participants")
+            if (e.PropertyName != "Participants")
             {
-                return;    
+                return;
             }
 
             var topic = sender as Topic;
             var conversation = Conversations.SingleOrDefault(conv => conv.Topics.SingleOrDefault(arg => arg.Id == topic.Id) != null);
             conversation.Topics.Remove(topic);
 
-			conversation = Conversations.FirstOrDefault(
+            conversation = Conversations.FirstOrDefault(
                 c => c.Participants.Where(p => p != this.me).SequenceEqual(topic.Participants));
 
-            if(conversation == null)
+            if (conversation == null)
             {
                 conversation = NewConversation(topic.Participants as List<Contact>);
             }
             conversation.Add(topic);
-		}
+        }
 
         Conversation NewConversation(List<Contact> contacts)
         {
             var conversation = new Conversation(contacts.Where(c => c.PhoneNumber != me.PhoneNumber), me);
- 			conversation.PropertyChanged += ReorderConversations;
-			
-            Conversations.Insert(0, conversation);
+            conversation.PropertyChanged += ReorderConversations;
+
+            Conversations.Add(conversation);
 
             return conversation;
         }
@@ -93,8 +98,17 @@ namespace Topichat.Core
                             .FirstOrDefault(top => top.Id == message.TopicId);
             if (topic == null)
             {
-                var participants = new List<Contact>(message.Receivers);
-                participants.Add(message.Sender);
+            
+                var participants = new List<Contact>
+                {
+                    message.Sender
+                };
+
+                var otherParticipants = message.Receivers.Where(p => p.PhoneNumber != this.me.PhoneNumber);
+                if (otherParticipants.Any())
+                {
+                    participants.AddRange(otherParticipants);
+                }
 
                 var conversation = StartConversation(participants);
                 topic = conversation.StartTopic(message.TopicId, message.Topic);
@@ -106,7 +120,7 @@ namespace Topichat.Core
         public Conversation FindConversation(List<Contact> participants)
         {
             return Conversations.FirstOrDefault(
-				c => c.Participants.Where(p => p.PhoneNumber != this.me.PhoneNumber).
+                c => c.Participants.Where(p => p.PhoneNumber != this.me.PhoneNumber).
                 SequenceEqual(participants.Where(p => p.PhoneNumber != this.me.PhoneNumber), new ContactComparer()));
         }
 

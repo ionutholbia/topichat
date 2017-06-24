@@ -5,7 +5,9 @@ namespace Topichat.Core
 {
     public interface IBrokerConnection : IDisposable
     {
-        Action<Message> MessageReceived { get; set;}
+        Task Connect();
+
+		Action<Message> MessageReceived { get; set;}
 
         Task SendMessage(Message message);
 	}

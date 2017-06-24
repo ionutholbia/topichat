@@ -29,7 +29,8 @@ namespace Topichat.Forms
 
 		protected override async void OnAppearing()
         {
-            if(this.conversationsListView.SelectedItem == null)
+            if(this.conversationsListView.SelectedItem == null &&
+               this.conversationsPageViewModel.Conversations.Count > 0)
             {
                 this.conversationsListView.SelectedItem = this.conversationsPageViewModel.Conversations.FirstOrDefault();
 			}
@@ -74,8 +75,8 @@ namespace Topichat.Forms
 
 		public void OnDelete(object sender, EventArgs e)
 		{
-			var mi = ((MenuItem)sender);
-			DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
+			var menuItem = ((MenuItem)sender);
+            App.ConversationManager.Conversations.Remove(menuItem.CommandParameter as Conversation);
 		}
 	}
 }

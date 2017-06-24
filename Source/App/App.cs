@@ -1,5 +1,6 @@
 using Xamarin.Forms;
 using Topichat.Core;
+using System.Threading.Tasks;
 
 namespace Topichat.Forms
 {
@@ -38,6 +39,7 @@ namespace Topichat.Forms
         protected override void OnStart()
         {
             // Handle when your app starts
+            Task.Run(async () => await ConversationManager.ConnectToBroker());
         }
 
         protected override void OnSleep()

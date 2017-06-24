@@ -15,13 +15,11 @@ namespace Topichat.Core
 
         public Topic(IEnumerable<Contact> otherParties, string id, string topic)
         {
-			participants = new List<Contact>();
+			participants = new List<Contact>(otherParties);
 			Messages = new ObservableCollection<Message>();
 			Messages.CollectionChanged += OnMessagesChanged;
 			Id = id;
 			Name = topic;
-			
-            participants.AddRange(otherParties);
         }
 
         public string Id { get; private set; }

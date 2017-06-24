@@ -34,7 +34,13 @@ namespace Topichat.Core.UnitTest
         public void Topic_MessageFromKnownParticipant()
         {
             var participantsChanged = false;
-            topic.PropertyChanged += (sender, e) => { participantsChanged = true; };
+            topic.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == "Participants")
+                {
+                    participantsChanged = true;
+                }
+            };
 
             var message =
                 new Message { TimeStamp = DateTime.UtcNow.AddMonths(-1), Sender = me, Text = "Salut ce faci?", Topic = "Default" };
