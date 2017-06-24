@@ -1,5 +1,6 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Topichat.Forms
 {
-    public class ConversationsPageViewModel
+    public class ConversationsPageViewModel : INotifyPropertyChanged
     {
         readonly INavigation navigation;
         readonly ConversationsPage masterDetailPage;
@@ -18,20 +19,27 @@ namespace Topichat.Forms
         {
             this.navigation = navigation;
             this.masterDetailPage = conversationPage;
-            Conversations = App.ConversationManager?.Conversations;
-			SearchCommand = new Command<string>(async (text) => await SearchInContactList(text));
+            Conversations = BackupConversations = App.ConversationManager?.Conversations;
 			AddContactCommand = new Command(async () => await OnContactAdded());
 		}
 
-        public ObservableCollection<Conversation> Conversations { get; }
+        public ObservableCollection<Conversation> BackupConversations { get; }
+
+        ObservableCollection<Conversation> conversations;
+		public ObservableCollection<Conversation> Conversations 
+        { 
+            get
+            {
+                return this.conversations;
+            }
+            private set
+            {
+                this.conversations = value;
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Conversations)));
+			}
+        }
 
 		public ICommand AddContactCommand { get; private set; }
-
-        public ICommand SearchCommand { get; private set; }
-
-		async Task SearchInContactList(string text)
-		{
-		}
 
 		async Task OnContactAdded()
 		{
@@ -72,6 +80,41 @@ namespace Topichat.Forms
 				BarBackgroundColor = (Color)Application.Current.Resources["primaryBlue"],
 				BarTextColor = Color.White
 			});
+		}
+
+		string searchFilter;
+		public string SearchFilter
+		{
+			get
+			{
+				return searchFilter;
+			}
+			set
+			{
+				if (searchFilter != value)
+				{
+					searchFilter = value;
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SearchFilter)));
+					FilterContacts(searchFilter);
+				}
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		void FilterContacts(string text)
+		{
+			if (string.IsNullOrEmpty(text))
+			{
+                Conversations = BackupConversations;
+			}
+			else
+			{
+				text = text.ToLower();
+                Conversations = new ObservableCollection<Conversation>(
+                    BackupConversations.Where(c => c.Participants.FirstOrDefault(
+                        p => p.ToString().ToLower().Contains(text)) != null));
+			}
 		}
 	}
 }

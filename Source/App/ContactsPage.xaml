@@ -13,7 +13,7 @@
 
     <StackLayout>
 		
-		<SearchBar x:Name="searchBar" Placeholder="Contact" SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" />
+		<SearchBar Placeholder="Contact" Text="{Binding SearchFilter}"/>
 		<ListView ItemsSource="{Binding Contacts}" HasUnevenRows="true" ItemTapped="OnListViewItemTapped" ItemSelected="OnListViewItemSelected">
 			<ListView.ItemTemplate>
 				<DataTemplate>

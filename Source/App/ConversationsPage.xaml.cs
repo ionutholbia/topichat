@@ -44,11 +44,7 @@ namespace Topichat.Forms
         {
             var topicsPage = new TopicsPage
             {
-                BindingContext = new TopicsPageViewModel
-                {
-                    Topics = conversation.Topics,
-                    Participants = conversation.Participants.ToList()
-                },
+                BindingContext = new TopicsPageViewModel(conversation.Topics, conversation.Participants.ToList()),
                 Title = conversation.ParticipantsNames
             };
             masterDetailPage.Detail = new NavigationPage(topicsPage)
